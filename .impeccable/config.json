@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/diseno/prototipo-inicio/index.html"
+        ],
+        "createdAt": "2026-11-09T10:05:39.072Z",
+        "reason": "Claude triage: .vitrina children are absolutely positioned art (ceiling light strip, plinth) that sit flush by design; text inside it has 16-20px inset"
+      }
+    ]
+  }
+}

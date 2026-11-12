@@ -1,0 +1,130 @@
+<section class="portada" aria-labelledby="titular">
+  <img class="portada__foto"
+       src="/editorial/heroe-1200.jpg"
+       srcset="/editorial/heroe-1200.jpg 1200w, /editorial/heroe-1800.jpg 1800w, /editorial/heroe-2400.jpg 2400w"
+       sizes="100vw" width="2400" height="2505" fetchpriority="high"
+       alt="Cadena plana dorada sobre el cuello, con un blazer negro" />
+  <div class="portada__texto">
+    <h1 id="titular" class="portada__titular">Hecha para llevarse puesta.</h1>
+    <p class="portada__bajada">Collares, aretes, anillos y pulseras en acero, plata y oro, con esmeraldas y cuarzos.</p>
+    <div class="portada__acciones">
+      <a class="boton boton--claro" routerLink="/catalogo">Comprar ahora</a>
+      <a class="boton boton--contorno-claro" href="#novedades">Ver novedades</a>
+    </div>
+  </div>
+</section>
+
+@if (categorias().length) {
+  <section class="seccion categorias" aria-labelledby="t-categorias">
+    <div class="seccion__cabeza">
+      <h2 id="t-categorias" class="seccion__titulo">Compra por categoría</h2>
+      <a class="enlace-flecha" routerLink="/catalogo">Todas las piezas <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M14 7l5 5-5 5" /></svg></a>
+    </div>
+    <ul class="categorias__rejilla">
+      @for (c of categorias(); track c.slug) {
+        <li>
+          <a class="categoria" [routerLink]="['/catalogo', c.slug]">
+            <span class="categoria__foto">
+              @if (fotoCategoria(c.slug); as foto) {
+                <img [src]="foto.src" [alt]="foto.alt" width="800" height="1000" loading="lazy" />
+              }
+            </span>
+            <span class="categoria__nombre">{{ c.nombre }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </section>
+}
+
+@if (esmeralda(); as sala) {
+  <section class="sala" aria-labelledby="t-esmeralda">
+    <div class="sala__texto">
+      <h2 id="t-esmeralda" class="sala__titulo">Esmeralda</h2>
+      <p>La piedra en el centro de Nalu. Descubre las piezas que la llevan.</p>
+      <a class="boton boton--claro" routerLink="/catalogo" [queryParams]="{ material: sala.id }">
+        Ver {{ sala.total === 1 ? 'la pieza' : 'las ' + sala.total + ' piezas' }} con esmeralda
+      </a>
+    </div>
+    <ul class="sala__piezas">
+      @for (p of sala.piezas; track p.slug) {
+        <li><app-vitrina-pieza [producto]="p" [sobreColor]="true" /></li>
+      }
+    </ul>
+  </section>
+}
+
+<section id="novedades" class="seccion novedades" aria-labelledby="t-novedades" [attr.aria-busy]="estado() === 'cargando'">
+  <div class="seccion__cabeza">
+    <h2 id="t-novedades" class="seccion__titulo">Recién llegadas</h2>
+    @if (estado() === 'listo' && novedades().length) {
+      <a class="enlace-flecha" routerLink="/catalogo">Ver todas <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M14 7l5 5-5 5" /></svg></a>
+    }
+  </div>
+  @switch (estado()) {
+    @case ('cargando') {
+      <ul class="rejilla" aria-hidden="true">
+        @for (i of esqueleto; track i) {
+          <li class="esqueleto"><span class="esqueleto__foto"></span><span class="esqueleto__linea"></span><span class="esqueleto__linea esqueleto__linea--corta"></span></li>
+        }
+      </ul>
+      <p class="sr" role="status">Cargando piezas…</p>
+    }
+    @case ('error') {
+      <div class="estado" role="alert">
+        <p>No pudimos cargar las piezas. Revisa tu conexión e inténtalo de nuevo.</p>
+        <button type="button" class="boton boton--secundario" (click)="cargarPiezas()">Reintentar</button>
+      </div>
+    }
+    @default {
+      @if (novedades().length) {
+        <ul class="rejilla">
+          @for (p of novedades(); track p.slug) {
+            <li><app-vitrina-pieza [producto]="p" /></li>
+          }
+        </ul>
+      } @else if (!esmeralda()) {
+        <div class="estado">
+          <p>Las primeras piezas llegan pronto.</p>
+        </div>
+      }
+    }
+  }
+</section>
+
+@if (metales().length) {
+  <section class="metales" aria-labelledby="t-metales">
+    <h2 id="t-metales" class="metales__titulo">Conoce cada metal.</h2>
+    <ul class="metales__lista">
+      @for (m of metales(); track m.id) {
+        <li>
+          <a class="metal" routerLink="/catalogo" [queryParams]="{ material: m.id }">
+            <span class="metal__nombre">{{ nombreMaterial(m) }}</span>
+            @if (definicionMetal(m); as definicion) { <span class="metal__definicion">{{ definicion }}</span> }
+            <span class="metal__ir">Ver piezas</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </section>
+}
+
+<section class="beneficios" aria-labelledby="t-beneficios">
+  <div class="beneficios__marco">
+    <h2 id="t-beneficios" class="beneficios__titulo">Comprar en Nalu</h2>
+    <dl class="beneficios__lista">
+      <div>
+        <dt>Envío a toda Colombia</dt>
+        <dd>Tarifa plana de {{ condiciones.envioTarifaPlana | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}, gratis en compras desde {{ condiciones.envioGratisDesde | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}.</dd>
+      </div>
+      <div>
+        <dt>Pago seguro con Wompi</dt>
+        <dd>Pagas en línea; Nalu no recibe ni guarda los datos de tu tarjeta.</dd>
+      </div>
+      <div>
+        <dt>Tu pieza, apartada</dt>
+        <dd>Al confirmar el pedido la reservamos {{ condiciones.reservaMinutos }} minutos mientras pagas.</dd>
+      </div>
+    </dl>
+  </div>
+</section>

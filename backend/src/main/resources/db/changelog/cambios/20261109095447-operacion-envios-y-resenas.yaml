@@ -1,0 +1,171 @@
+# Fase 5: envíos y reseñas. Generado con scripts/liquibase-diff.sh y revisado a mano (nombres de PK y
+# CHECK de calificación, que Liquibase Community no genera; SQL documentado en el plan §5.1).
+databaseChangeLog:
+- changeSet:
+    id: 1794236122835-1
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_envio
+            name: id_envio
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: costo
+            type: numeric(12, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: estado
+            type: VARCHAR(25)
+        - column:
+            constraints:
+              nullable: false
+            name: fecha_despacho
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            name: fecha_entrega
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: numero_guia
+            type: VARCHAR(60)
+        - column:
+            constraints:
+              nullable: false
+            name: transportadora
+            type: VARCHAR(60)
+        - column:
+            constraints:
+              nullable: false
+            name: id_pedido
+            type: BIGINT
+        tableName: envio
+- changeSet:
+    id: 1794236122835-2
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_resena
+            name: id_resena
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: calificacion
+            type: INTEGER
+        - column:
+            name: comentario
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: estado
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: fecha
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: id_usuario
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: id_producto
+            type: BIGINT
+        tableName: resena
+- changeSet:
+    id: 1794236122835-3
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: id_pedido
+        constraintName: uk_envio_pedido
+        tableName: envio
+- changeSet:
+    id: 1794236122835-4
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: id_producto, id_usuario
+        constraintName: uk_resena_producto_cliente
+        tableName: resena
+- changeSet:
+    id: 1794236122835-5
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: id_producto
+        - column:
+            name: estado
+        indexName: idx_resena_producto_estado
+        tableName: resena
+- changeSet:
+    id: 1794236122835-6
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_pedido
+        baseTableName: envio
+        constraintName: fk_envio_pedido
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_pedido
+        referencedTableName: pedido
+        validate: true
+- changeSet:
+    id: 1794236122835-7
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_usuario
+        baseTableName: resena
+        constraintName: fk_resena_cliente
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_usuario
+        referencedTableName: cliente
+        validate: true
+- changeSet:
+    id: 1794236122835-8
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_producto
+        baseTableName: resena
+        constraintName: fk_resena_producto
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_producto
+        referencedTableName: producto
+        validate: true
+
+- changeSet:
+    id: fase-5-check-calificacion
+    author: nalu
+    changes:
+    - sql:
+        sql: ALTER TABLE resena ADD CONSTRAINT ck_resena_calificacion CHECK (calificacion BETWEEN 1 AND 5)
+    rollback:
+    - sql:
+        sql: ALTER TABLE resena DROP CONSTRAINT ck_resena_calificacion

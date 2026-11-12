@@ -1,0 +1,54 @@
+.ficha {
+  display: grid; gap: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1rem, 3vw, 2.5rem) var(--gutter) var(--ritmo);
+}
+@media (min-width: 60rem) { .ficha { grid-template-columns: 3fr 2fr; align-items: start; } }
+.migas { display: flex; flex-wrap: wrap; gap: 0.5rem; font-size: 0.9rem; color: var(--tinta-3); margin-bottom: 1rem; }
+.vitrina {
+  position: relative; aspect-ratio: 1; overflow: hidden; background: var(--piedra); border: 1px solid var(--piedra-borde);
+}
+.luz {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(55% 45% at 50% 18%, rgb(243 238 230 / 0.2), transparent 70%);
+}
+.vitrina__foto { width: 100%; height: 100%; object-fit: cover; }
+.miniaturas { list-style: none; padding: 0; margin: 0.75rem 0 0; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.miniaturas button { padding: 0; border: 1px solid var(--regla-suave); background: none; cursor: pointer; }
+.miniaturas button[aria-pressed='true'] { border-color: var(--acento); }
+.miniaturas img { width: 64px; height: 64px; object-fit: cover; }
+
+.cedula {
+  position: sticky; top: 1.5rem;
+  display: grid; gap: 1rem; padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--piedra); color: var(--tinta);
+}
+.cedula__nombre { margin: 0; font-family: var(--f-titular); font-weight: 400; font-size: clamp(1.7rem, 3.5vw, 2.4rem); }
+.cedula__precio { margin: 0; font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+.cedula__datos { margin: 0; display: grid; gap: 0.4rem; padding: 0.75rem 0; border-block: 1px solid var(--regla); }
+.cedula__datos div { display: grid; grid-template-columns: 5.5rem 1fr; gap: 0.5rem; }
+.cedula__datos dt { color: var(--tinta-2); font-size: 0.85rem; letter-spacing: 0.04em; }
+.cedula__datos dd { margin: 0; }
+.tallas { border: 0; margin: 0; padding: 0; }
+.tallas legend { font-size: 0.85rem; color: var(--tinta-2); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+.tallas__opciones { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.talla {
+  min-width: 48px; min-height: 44px; padding: 0.4rem 0.8rem; border: 1px solid var(--regla);
+  background: transparent; color: var(--tinta); font: inherit; cursor: pointer;
+}
+.talla:hover:not(:disabled) { border-color: var(--tinta); }
+.talla--elegida { background: var(--tinta); color: var(--piedra); border-color: var(--tinta); }
+.talla:disabled { color: var(--tinta-2); text-decoration: line-through; border-style: dashed; cursor: not-allowed; }
+.talla:focus-visible { outline-color: var(--tinta); }
+.cedula__agotada { margin: 0; color: var(--error); font-weight: 600; }
+.cedula__descripcion { color: var(--tinta-2); line-height: 1.65; white-space: pre-line; }
+.cedula__descripcion p { margin: 0; }
+.cedula a { color: var(--tinta); }
+.boton--oscuro { background: var(--tinta); color: var(--piedra); width: 100%; }
+.boton--oscuro:hover:not(:disabled) { background: var(--tinta-hover); }
+.cedula__ok { margin: 0; color: var(--esmeralda); }
+.resenas { padding: 0 var(--gutter) var(--ritmo); max-width: 60rem; }
+.resenas h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0 0 0.5rem; }
+.resenas__promedio { color: var(--acento); margin: 0 0 1.25rem; }
+.resenas ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+.resenas li { padding: 1rem 0; border-top: 1px solid var(--regla-suave); }
+.resenas li p { margin: 0 0 0.35rem; }

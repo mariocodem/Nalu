@@ -1,0 +1,6 @@
+# Changelog maestro. Incluye en orden alfabético (prefijo de fecha) todos los changesets de cambios/.
+# Los changesets se generan con scripts/liquibase-diff.sh y se revisan a mano.
+databaseChangeLog:
+  - includeAll:
+      path: db/changelog/cambios/
+      errorIfMissingOrEmpty: false

@@ -1,0 +1,75 @@
+# RNF15: registro de auditoría de acciones del panel y cambios de precio. Generado y revisado (nombre de PK).
+databaseChangeLog:
+- changeSet:
+    id: 1794237303280-1
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_auditoria
+            name: id_auditoria
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: accion
+            type: VARCHAR(120)
+        - column:
+            name: detalle
+            type: VARCHAR(500)
+        - column:
+            constraints:
+              nullable: false
+            name: fecha
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            name: id_recurso
+            type: VARCHAR(40)
+        - column:
+            name: recurso
+            type: VARCHAR(40)
+        - column:
+            name: id_usuario
+            type: BIGINT
+        tableName: auditoria
+- changeSet:
+    id: 1794237303280-2
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: fecha
+        indexName: idx_auditoria_fecha
+        tableName: auditoria
+- changeSet:
+    id: 1794237303280-3
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: recurso
+        - column:
+            name: id_recurso
+        indexName: idx_auditoria_recurso
+        tableName: auditoria
+- changeSet:
+    id: 1794237303280-4
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_usuario
+        baseTableName: auditoria
+        constraintName: fk_auditoria_usuario
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_usuario
+        referencedTableName: usuario
+        validate: true
+

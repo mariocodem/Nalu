@@ -1,0 +1,114 @@
+# Fase 2: metadatos SEO (RF05) y precio_desde de producto (derivado, ADR 003) con índices del catálogo.
+# Generado con scripts/liquibase-diff.sh y revisado a mano (nombre de PK).
+databaseChangeLog:
+- changeSet:
+    id: 1794233725831-1
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_metadato_seo
+            name: id_metadato
+            type: BIGINT
+        - column:
+            name: datos_estructurados
+            type: JSONB
+        - column:
+            name: meta_descripcion
+            type: VARCHAR(320)
+        - column:
+            name: palabras_clave
+            type: VARCHAR(255)
+        - column:
+            name: titulo
+            type: VARCHAR(160)
+        - column:
+            name: url_canonica
+            type: VARCHAR(255)
+        - column:
+            name: id_categoria
+            type: BIGINT
+        - column:
+            name: id_producto
+            type: BIGINT
+        tableName: metadato_seo
+- changeSet:
+    id: 1794233725831-2
+    author: nalu
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: precio_desde
+            type: numeric(12, 2)
+        tableName: producto
+- changeSet:
+    id: 1794233725831-3
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: id_categoria
+        constraintName: uk_metadato_seo_categoria
+        tableName: metadato_seo
+- changeSet:
+    id: 1794233725831-4
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: id_producto
+        constraintName: uk_metadato_seo_producto
+        tableName: metadato_seo
+- changeSet:
+    id: 1794233725831-5
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: id_categoria
+        indexName: idx_producto_categoria
+        tableName: producto
+- changeSet:
+    id: 1794233725831-6
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: estado
+        - column:
+            name: precio_desde
+        indexName: idx_producto_estado_precio
+        tableName: producto
+- changeSet:
+    id: 1794233725831-7
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_categoria
+        baseTableName: metadato_seo
+        constraintName: fk_metadato_seo_categoria
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_categoria
+        referencedTableName: categoria
+        validate: true
+- changeSet:
+    id: 1794233725831-8
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_producto
+        baseTableName: metadato_seo
+        constraintName: fk_metadato_seo_producto
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_producto
+        referencedTableName: producto
+        validate: true
+

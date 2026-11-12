@@ -1,0 +1,89 @@
+@if (visible()) {
+  @if (!abierto()) {
+    <button #lanzador type="button" class="lanzador" (click)="abrir()" aria-controls="asistente-panel" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15v10h-8l-4.5 3.5v-3.5h-2.5z" /><path d="M8.5 10.5h7" /></svg>
+      <span>Asesora</span>
+    </button>
+  } @else {
+    <section id="asistente-panel" class="panel" role="dialog" aria-modal="false" aria-labelledby="asistente-titulo">
+      <header class="panel__cabeza">
+        <div class="panel__titulos">
+          <h2 id="asistente-titulo">Asesora Nalu</h2>
+          <p>Te ayudo a elegir con el catálogo real</p>
+        </div>
+        @if (mensajes().length) {
+          <button type="button" class="panel__texto" (click)="reiniciar()">Nueva conversación</button>
+        }
+        <button type="button" class="panel__cerrar" (click)="cerrar()" aria-label="Cerrar la asesora">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+      </header>
+
+      <div #lista class="panel__mensajes" role="log" aria-live="polite" aria-relevant="additions" tabindex="0"
+           aria-label="Conversación con la asesora">
+        <div class="burbuja burbuja--asistente">
+          <p>Hola, soy la asesora de Nalu. Te ayudo a encontrar una pieza, entender los materiales y las tallas o
+            resolver dudas de envío y pago.</p>
+        </div>
+
+        @if (!mensajes().length) {
+          <ul class="sugerencias" aria-label="Preguntas sugeridas">
+            @for (s of sugerencias(); track s) {
+              <li><button type="button" (click)="usarSugerencia(s)">{{ s }}</button></li>
+            }
+          </ul>
+        }
+
+        @for (m of mensajes(); track m.id) {
+          <div class="burbuja" [class.burbuja--cliente]="m.rol === 'cliente'" [class.burbuja--asistente]="m.rol === 'asistente'"
+               [class.burbuja--fallida]="m.fallido">
+            <span class="sr">{{ m.rol === 'cliente' ? 'Tú escribiste:' : 'La asesora responde:' }}</span>
+            @for (b of m.bloques; track $index) {
+              @if (b.tipo === 'parrafo') {
+                <p>@for (s of b.segmentos; track $index) {@if (s.negrita) {<strong>{{ s.texto }}</strong>} @else {<span>{{ s.texto }}</span>}}</p>
+              } @else if (b.ordenada) {
+                <ol>@for (item of b.items; track $index) {<li>@for (s of item; track $index) {@if (s.negrita) {<strong>{{ s.texto }}</strong>} @else {<span>{{ s.texto }}</span>}}</li>}</ol>
+              } @else {
+                <ul>@for (item of b.items; track $index) {<li>@for (s of item; track $index) {@if (s.negrita) {<strong>{{ s.texto }}</strong>} @else {<span>{{ s.texto }}</span>}}</li>}</ul>
+              }
+            }
+          </div>
+          @if (m.piezas.length) {
+            <div class="piezas">
+              @for (p of m.piezas; track p.slug) {
+                <app-tarjeta-asistente [pieza]="p" />
+              }
+            </div>
+          }
+        }
+
+        @if (enviando()) {
+          <div class="burbuja burbuja--asistente escribiendo" role="status">
+            <span class="sr">La asesora está escribiendo</span>
+            <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
+          </div>
+        }
+
+        @if (error(); as e) {
+          <div class="aviso-chat" role="alert">
+            <p>{{ e }}</p>
+            <button type="button" (click)="reintentar()">Reintentar</button>
+          </div>
+        }
+      </div>
+
+      <form class="panel__entrada" (submit)="$event.preventDefault(); enviar()">
+        <label class="sr" for="asistente-campo">Escribe tu pregunta</label>
+        <textarea #campo id="asistente-campo" rows="1" [attr.maxlength]="maxMensaje"
+                  placeholder="Pregunta por una pieza, un material o el envío"
+                  [value]="borrador()" (input)="borrador.set($any($event.target).value)"
+                  (keydown.enter)="alPulsarEnter($event)"></textarea>
+        <button type="submit" class="panel__enviar" [disabled]="!borrador().trim() || enviando()" aria-label="Enviar mensaje">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M14 7l5 5-5 5" /></svg>
+        </button>
+      </form>
+      <p class="panel__aviso">Respuestas generadas con IA (Google Gemini). Confirma precio y disponibilidad en la ficha y no
+        compartas datos personales.</p>
+    </section>
+  }
+}

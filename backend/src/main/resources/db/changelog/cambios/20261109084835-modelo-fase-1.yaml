@@ -1,0 +1,596 @@
+# Modelo de la Fase 1: catálogo (categoría, material, producto, variantes, imágenes), direcciones,
+# movimientos de inventario, intentos de login y último acceso del administrador.
+# Generado con scripts/liquibase-diff.sh y revisado a mano: nombres de PK y CHECK de existencias.
+databaseChangeLog:
+- changeSet:
+    id: 1794232145603-1
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_categoria
+            name: id_categoria
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: activa
+            type: BOOLEAN
+        - column:
+            name: descripcion
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: nombre
+            type: VARCHAR(80)
+        - column:
+            constraints:
+              nullable: false
+            name: slug
+            type: VARCHAR(100)
+        - column:
+            name: id_categoria_padre
+            type: BIGINT
+        tableName: categoria
+- changeSet:
+    id: 1794232145603-2
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_direccion
+            name: id_direccion
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: activa
+            type: BOOLEAN
+        - column:
+            constraints:
+              nullable: false
+            name: ciudad
+            type: VARCHAR(60)
+        - column:
+            name: codigo_postal
+            type: VARCHAR(12)
+        - column:
+            constraints:
+              nullable: false
+            name: departamento
+            type: VARCHAR(60)
+        - column:
+            constraints:
+              nullable: false
+            name: destinatario
+            type: VARCHAR(120)
+        - column:
+            constraints:
+              nullable: false
+            name: direccion
+            type: VARCHAR(160)
+        - column:
+            constraints:
+              nullable: false
+            name: etiqueta
+            type: VARCHAR(40)
+        - column:
+            constraints:
+              nullable: false
+            name: telefono
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: id_usuario
+            type: BIGINT
+        tableName: direccion
+- changeSet:
+    id: 1794232145603-3
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_imagen_producto
+            name: id_imagen
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: orden
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: principal
+            type: BOOLEAN
+        - column:
+            constraints:
+              nullable: false
+            name: texto_alternativo
+            type: VARCHAR(160)
+        - column:
+            constraints:
+              nullable: false
+            name: url
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: id_producto
+            type: BIGINT
+        tableName: imagen_producto
+- changeSet:
+    id: 1794232145603-4
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_intento_login
+            name: id_intento_login
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: correo
+            type: VARCHAR(120)
+        - column:
+            constraints:
+              nullable: false
+            name: exitoso
+            type: BOOLEAN
+        - column:
+            constraints:
+              nullable: false
+            name: fecha
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            name: ip
+            type: VARCHAR(45)
+        tableName: intento_login
+- changeSet:
+    id: 1794232145603-5
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_material
+            name: id_material
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: factor_precio
+            type: numeric(6, 3)
+        - column:
+            name: ley
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: requiere_certificado
+            type: BOOLEAN
+        - column:
+            constraints:
+              nullable: false
+            name: tipo
+            type: VARCHAR(30)
+        tableName: material
+- changeSet:
+    id: 1794232145603-6
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_movimiento_inventario
+            name: id_movimiento
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: cantidad
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: fecha
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: motivo
+            type: VARCHAR(160)
+        - column:
+            constraints:
+              nullable: false
+            name: tipo
+            type: VARCHAR(20)
+        - column:
+            name: id_usuario
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: id_variante
+            type: BIGINT
+        tableName: movimiento_inventario
+- changeSet:
+    id: 1794232145603-7
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_producto
+            name: id_producto
+            type: BIGINT
+        - column:
+            name: descripcion
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: estado
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: fecha_creacion
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: nombre
+            type: VARCHAR(120)
+        - column:
+            constraints:
+              nullable: false
+            name: precio_base
+            type: numeric(12, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: sku
+            type: VARCHAR(40)
+        - column:
+            constraints:
+              nullable: false
+            name: slug
+            type: VARCHAR(140)
+        - column:
+            constraints:
+              nullable: false
+            name: id_categoria
+            type: BIGINT
+        tableName: producto
+- changeSet:
+    id: 1794232145603-8
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            name: peso_gramos
+            type: numeric(8, 2)
+        - column:
+            name: quilates
+            type: numeric(6, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: rol
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: id_material
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: id_producto
+            type: BIGINT
+        tableName: producto_material
+- changeSet:
+    id: 1794232145603-9
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_variante_producto
+            name: id_variante
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: activa
+            type: BOOLEAN
+        - column:
+            name: peso_gramos
+            type: numeric(8, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: precio_adicional
+            type: numeric(12, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: sku
+            type: VARCHAR(40)
+        - column:
+            constraints:
+              nullable: false
+            name: stock_actual
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: stock_reservado
+            type: INTEGER
+        - column:
+            name: talla
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: version
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: id_producto
+            type: BIGINT
+        tableName: variante_producto
+- changeSet:
+    id: 1794232145603-10
+    author: nalu
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: ultimo_acceso
+            type: TIMESTAMP(6) WITH TIME ZONE
+        tableName: administrador
+- changeSet:
+    id: 1794232145603-11
+    author: nalu
+    changes:
+    - addPrimaryKey:
+        columnNames: id_producto, id_material
+        constraintName: pk_producto_material
+        tableName: producto_material
+- changeSet:
+    id: 1794232145603-12
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: slug
+        constraintName: uk_categoria_slug
+        tableName: categoria
+- changeSet:
+    id: 1794232145603-13
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: tipo, ley
+        constraintName: uk_material_tipo_ley
+        tableName: material
+- changeSet:
+    id: 1794232145603-14
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: sku
+        constraintName: uk_producto_sku
+        tableName: producto
+- changeSet:
+    id: 1794232145603-15
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: slug
+        constraintName: uk_producto_slug
+        tableName: producto
+- changeSet:
+    id: 1794232145603-16
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: sku
+        constraintName: uk_variante_producto_sku
+        tableName: variante_producto
+- changeSet:
+    id: 1794232145603-17
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: correo
+        - column:
+            name: fecha
+        indexName: idx_intento_login_correo_fecha
+        tableName: intento_login
+- changeSet:
+    id: 1794232145603-18
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: id_variante
+        indexName: idx_movimiento_inventario_variante
+        tableName: movimiento_inventario
+- changeSet:
+    id: 1794232145603-19
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_categoria_padre
+        baseTableName: categoria
+        constraintName: fk_categoria_categoria
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_categoria
+        referencedTableName: categoria
+        validate: true
+- changeSet:
+    id: 1794232145603-20
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_usuario
+        baseTableName: direccion
+        constraintName: fk_direccion_cliente
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_usuario
+        referencedTableName: cliente
+        validate: true
+- changeSet:
+    id: 1794232145603-21
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_producto
+        baseTableName: imagen_producto
+        constraintName: fk_imagen_producto_producto
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_producto
+        referencedTableName: producto
+        validate: true
+- changeSet:
+    id: 1794232145603-22
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_usuario
+        baseTableName: movimiento_inventario
+        constraintName: fk_movimiento_inventario_administrador
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_usuario
+        referencedTableName: administrador
+        validate: true
+- changeSet:
+    id: 1794232145603-23
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_variante
+        baseTableName: movimiento_inventario
+        constraintName: fk_movimiento_inventario_variante
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_variante
+        referencedTableName: variante_producto
+        validate: true
+- changeSet:
+    id: 1794232145603-24
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_categoria
+        baseTableName: producto
+        constraintName: fk_producto_categoria
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_categoria
+        referencedTableName: categoria
+        validate: true
+- changeSet:
+    id: 1794232145603-25
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_material
+        baseTableName: producto_material
+        constraintName: fk_producto_material_material
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_material
+        referencedTableName: material
+        validate: true
+- changeSet:
+    id: 1794232145603-26
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_producto
+        baseTableName: producto_material
+        constraintName: fk_producto_material_producto
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_producto
+        referencedTableName: producto
+        validate: true
+- changeSet:
+    id: 1794232145603-27
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_producto
+        baseTableName: variante_producto
+        constraintName: fk_variante_producto_producto
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_producto
+        referencedTableName: producto
+        validate: true
+
+- changeSet:
+    id: fase-1-check-stock
+    author: nalu
+    comment: >-
+      RNF10: la existencia nunca es negativa ni menor que lo reservado. Liquibase Community no genera
+      el @Check de VarianteProducto en el diff; es la excepción de SQL documentada en el plan §5.1.
+    changes:
+    - sql:
+        sql: >-
+          ALTER TABLE variante_producto ADD CONSTRAINT ck_variante_producto_stock
+          CHECK (stock_actual >= 0 AND stock_reservado >= 0 AND stock_reservado <= stock_actual)
+    rollback:
+    - sql:
+        sql: ALTER TABLE variante_producto DROP CONSTRAINT ck_variante_producto_stock

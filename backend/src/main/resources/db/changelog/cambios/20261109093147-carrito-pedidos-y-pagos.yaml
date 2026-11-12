@@ -1,0 +1,637 @@
+# Fases 3 y 4: carrito, cupones, pedidos con historial, pagos y eventos de la pasarela.
+# Generado con scripts/liquibase-diff.sh y revisado a mano (nombres de PK).
+databaseChangeLog:
+- changeSet:
+    id: 1794234746572-1
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_carrito
+            name: id_carrito
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: estado
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: fecha_actualizacion
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: fecha_creacion
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: token
+            type: VARCHAR(64)
+        - column:
+            name: id_usuario
+            type: BIGINT
+        tableName: carrito
+- changeSet:
+    id: 1794234746572-2
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_detalle_pedido
+            name: id_detalle
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: cantidad
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: descuento_aplicado
+            type: numeric(12, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: precio_unitario
+            type: numeric(12, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: id_pedido
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: id_variante
+            type: BIGINT
+        tableName: detalle_pedido
+- changeSet:
+    id: 1794234746572-3
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_evento_pasarela
+            name: id_evento
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: carga
+            type: JSONB
+        - column:
+            constraints:
+              nullable: false
+            name: clave_idempotencia
+            type: VARCHAR(120)
+        - column:
+            constraints:
+              nullable: false
+            name: fecha_recepcion
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: tipo
+            type: VARCHAR(60)
+        tableName: evento_pasarela
+- changeSet:
+    id: 1794234746572-4
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_historial_estado_pedido
+            name: id_historial
+            type: BIGINT
+        - column:
+            name: estado_anterior
+            type: VARCHAR(25)
+        - column:
+            constraints:
+              nullable: false
+            name: estado_nuevo
+            type: VARCHAR(25)
+        - column:
+            constraints:
+              nullable: false
+            name: fecha
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            name: nota
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: id_pedido
+            type: BIGINT
+        - column:
+            name: id_usuario
+            type: BIGINT
+        tableName: historial_estado_pedido
+- changeSet:
+    id: 1794234746572-5
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_item_carrito
+            name: id_item
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: cantidad
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: precio_unitario
+            type: numeric(12, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: id_carrito
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: id_variante
+            type: BIGINT
+        tableName: item_carrito
+- changeSet:
+    id: 1794234746572-6
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_pago
+            name: id_pago
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: estado
+            type: VARCHAR(25)
+        - column:
+            constraints:
+              nullable: false
+            name: fecha_creacion
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            name: fecha_transaccion
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            name: metodo
+            type: VARCHAR(30)
+        - column:
+            constraints:
+              nullable: false
+            name: monto
+            type: numeric(12, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: referencia
+            type: VARCHAR(60)
+        - column:
+            name: referencia_externa
+            type: VARCHAR(80)
+        - column:
+            constraints:
+              nullable: false
+            name: id_pedido
+            type: BIGINT
+        tableName: pago
+- changeSet:
+    id: 1794234746572-7
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_pedido
+            name: id_pedido
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: costo_envio
+            type: numeric(12, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: descuento
+            type: numeric(12, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: estado
+            type: VARCHAR(25)
+        - column:
+            constraints:
+              nullable: false
+            name: fecha
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            name: motivo_cancelacion
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: numero_pedido
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: reserva_activa
+            type: BOOLEAN
+        - column:
+            name: reserva_expira_en
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: subtotal
+            type: numeric(12, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: total
+            type: numeric(12, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: version
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: id_usuario
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: id_direccion
+            type: BIGINT
+        - column:
+            name: id_promocion
+            type: BIGINT
+        tableName: pedido
+- changeSet:
+    id: 1794234746572-8
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_promocion
+            name: id_promocion
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: activa
+            type: BOOLEAN
+        - column:
+            constraints:
+              nullable: false
+            name: codigo
+            type: VARCHAR(30)
+        - column:
+            constraints:
+              nullable: false
+            name: fecha_fin
+            type: date
+        - column:
+            constraints:
+              nullable: false
+            name: fecha_inicio
+            type: date
+        - column:
+            constraints:
+              nullable: false
+            name: tipo
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: usos_actuales
+            type: INTEGER
+        - column:
+            name: usos_maximos
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: valor
+            type: numeric(12, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: version
+            type: BIGINT
+        tableName: promocion
+- changeSet:
+    id: 1794234746572-9
+    author: nalu
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: id_pedido
+            type: BIGINT
+        tableName: movimiento_inventario
+- changeSet:
+    id: 1794234746572-10
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: token
+        constraintName: uk_carrito_token
+        tableName: carrito
+- changeSet:
+    id: 1794234746572-11
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: clave_idempotencia
+        constraintName: uk_evento_pasarela_clave
+        tableName: evento_pasarela
+- changeSet:
+    id: 1794234746572-12
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: id_carrito, id_variante
+        constraintName: uk_item_carrito_variante
+        tableName: item_carrito
+- changeSet:
+    id: 1794234746572-13
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: referencia
+        constraintName: uk_pago_referencia
+        tableName: pago
+- changeSet:
+    id: 1794234746572-14
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: numero_pedido
+        constraintName: uk_pedido_numero
+        tableName: pedido
+- changeSet:
+    id: 1794234746572-15
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: codigo
+        constraintName: uk_promocion_codigo
+        tableName: promocion
+- changeSet:
+    id: 1794234746572-16
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: id_usuario
+        - column:
+            name: estado
+        indexName: idx_carrito_cliente_estado
+        tableName: carrito
+- changeSet:
+    id: 1794234746572-17
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: id_usuario
+        indexName: idx_pedido_cliente
+        tableName: pedido
+- changeSet:
+    id: 1794234746572-18
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: estado
+        - column:
+            name: fecha
+        indexName: idx_pedido_estado_fecha
+        tableName: pedido
+- changeSet:
+    id: 1794234746572-19
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: reserva_activa
+        - column:
+            name: reserva_expira_en
+        indexName: idx_pedido_reserva
+        tableName: pedido
+- changeSet:
+    id: 1794234746572-20
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_usuario
+        baseTableName: carrito
+        constraintName: fk_carrito_cliente
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_usuario
+        referencedTableName: cliente
+        validate: true
+- changeSet:
+    id: 1794234746572-21
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_pedido
+        baseTableName: detalle_pedido
+        constraintName: fk_detalle_pedido_pedido
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_pedido
+        referencedTableName: pedido
+        validate: true
+- changeSet:
+    id: 1794234746572-22
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_variante
+        baseTableName: detalle_pedido
+        constraintName: fk_detalle_pedido_variante
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_variante
+        referencedTableName: variante_producto
+        validate: true
+- changeSet:
+    id: 1794234746572-23
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_pedido
+        baseTableName: historial_estado_pedido
+        constraintName: fk_historial_estado_pedido_pedido
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_pedido
+        referencedTableName: pedido
+        validate: true
+- changeSet:
+    id: 1794234746572-24
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_usuario
+        baseTableName: historial_estado_pedido
+        constraintName: fk_historial_estado_pedido_usuario
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_usuario
+        referencedTableName: usuario
+        validate: true
+- changeSet:
+    id: 1794234746572-25
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_carrito
+        baseTableName: item_carrito
+        constraintName: fk_item_carrito_carrito
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_carrito
+        referencedTableName: carrito
+        validate: true
+- changeSet:
+    id: 1794234746572-26
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_variante
+        baseTableName: item_carrito
+        constraintName: fk_item_carrito_variante
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_variante
+        referencedTableName: variante_producto
+        validate: true
+- changeSet:
+    id: 1794234746572-27
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_pedido
+        baseTableName: movimiento_inventario
+        constraintName: fk_movimiento_inventario_pedido
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_pedido
+        referencedTableName: pedido
+        validate: true
+- changeSet:
+    id: 1794234746572-28
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_pedido
+        baseTableName: pago
+        constraintName: fk_pago_pedido
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_pedido
+        referencedTableName: pedido
+        validate: true
+- changeSet:
+    id: 1794234746572-29
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_usuario
+        baseTableName: pedido
+        constraintName: fk_pedido_cliente
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_usuario
+        referencedTableName: cliente
+        validate: true
+- changeSet:
+    id: 1794234746572-30
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_direccion
+        baseTableName: pedido
+        constraintName: fk_pedido_direccion
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_direccion
+        referencedTableName: direccion
+        validate: true
+- changeSet:
+    id: 1794234746572-31
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_promocion
+        baseTableName: pedido
+        constraintName: fk_pedido_promocion
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_promocion
+        referencedTableName: promocion
+        validate: true
+

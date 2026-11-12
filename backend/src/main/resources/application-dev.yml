@@ -1,0 +1,9 @@
+# Perfil de desarrollo local: lee las variables del .env de la raíz del repositorio
+# (./mvnw spring-boot:run -Dspring-boot.run.profiles=dev desde backend/).
+spring:
+  config:
+    import: optional:file:../.env[.properties]
+
+nalu:
+  app:
+    cookie-segura: false   # en local el frontend se sirve por HTTP

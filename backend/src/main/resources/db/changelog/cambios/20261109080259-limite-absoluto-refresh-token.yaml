@@ -1,0 +1,28 @@
+# refresh_token: tope absoluto de la sesión heredado en cada rotación (limite_absoluto) y se elimina
+# ultimo_uso, redundante porque cada uso rota el token. Generado con scripts/liquibase-diff.sh y
+# revisado a mano (delete previo).
+databaseChangeLog:
+- changeSet:
+    id: 1794229409388-1
+    author: nalu
+    changes:
+    # Los refresh tokens son efímeros: se borran para poder añadir la columna NOT NULL.
+    # Efecto: las sesiones abiertas deben iniciarse de nuevo.
+    - delete:
+        tableName: refresh_token
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: limite_absoluto
+            type: TIMESTAMP(6) WITH TIME ZONE
+        tableName: refresh_token
+- changeSet:
+    id: 1794229409388-2
+    author: nalu
+    changes:
+    - dropColumn:
+        columnName: ultimo_uso
+        tableName: refresh_token
+

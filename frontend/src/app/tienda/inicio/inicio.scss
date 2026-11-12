@@ -1,0 +1,302 @@
+:host { display: block; }
+
+/* ───────── Botones sobre fondo oscuro o esmeralda ───────── */
+.boton--claro {
+  background: var(--fondo);
+  color: var(--tinta);
+
+  &:hover { background: var(--piedra); }
+}
+
+.boton--contorno-claro {
+  background: transparent;
+  color: var(--fondo);
+  border-color: rgb(255 255 255 / 0.7);
+
+  &:hover { background: var(--fondo); color: var(--tinta); border-color: var(--fondo); }
+}
+
+.boton--claro:focus-visible,
+.boton--contorno-claro:focus-visible { outline-color: var(--fondo); }
+
+/* ───────── Portada ───────── */
+.portada {
+  position: relative;
+  display: grid;
+  align-items: end;
+  height: clamp(540px, 78svh, 820px);
+  overflow: hidden;
+  background: #0b0b0b;
+  color: var(--fondo);
+  isolation: isolate;
+
+  /* velo inferior: asegura el contraste del texto sobre la fotografía */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 40% 0 0;
+    z-index: -1;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.5), transparent);
+  }
+}
+
+.portada__foto {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 28%;
+  animation: asentar 2.2s var(--ease) both;
+}
+
+.portada__texto {
+  width: min(100% - 2 * var(--gutter), var(--ancho));
+  margin-inline: auto;
+  padding-bottom: clamp(2.5rem, 7vh, 5rem);
+  animation: emerger 1.2s 0.25s var(--ease) both;
+}
+
+.portada__titular {
+  max-width: 11ch;
+  margin: 0 0 1.1rem;
+  font-size: clamp(2.9rem, 7.4vw, 6rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.portada__bajada {
+  max-width: 34ch;
+  margin: 0 0 2rem;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: rgb(255 255 255 / 0.86);
+}
+
+.portada__acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+@keyframes asentar {
+  from { transform: scale(1.04); opacity: 0.4; }
+  to { transform: none; opacity: 1; }
+}
+
+@keyframes emerger {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ───────── Secciones ───────── */
+.seccion {
+  width: min(100% - 2 * var(--gutter), var(--ancho));
+  margin: var(--ritmo) auto 0;
+}
+
+.seccion__cabeza {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.seccion__titulo {
+  margin: 0;
+  font-size: clamp(2rem, 3.8vw, 3.1rem);
+}
+
+.enlace-flecha {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: underline;
+
+  svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.3s var(--ease); }
+  &:hover svg { transform: translateX(3px); }
+}
+
+/* ───────── Categorías ───────── */
+.categorias { margin-top: clamp(2.25rem, 4vw, 3.5rem); }
+
+.categorias__rejilla {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.75rem, 1.6vw, 1.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.categoria {
+  display: grid;
+  gap: 0.9rem;
+  text-decoration: none;
+}
+
+.categoria__foto {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--piedra);
+
+  img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+}
+
+.categoria:hover img { transform: scale(1.04); }
+
+.categoria__nombre {
+  font-family: var(--f-titular);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1.1;
+  text-underline-offset: 0.2em;
+}
+
+.categoria:hover .categoria__nombre { text-decoration: underline; text-decoration-thickness: 1px; }
+
+/* ───────── Sala Esmeralda ───────── */
+.sala {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.9fr) 2fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+  margin-top: var(--ritmo);
+  padding: clamp(3.5rem, 7vw, 6.5rem) max(var(--gutter), (100% - var(--ancho)) / 2);
+  background: var(--esmeralda-profunda);
+  color: var(--sobre-esmeralda);
+
+  p { max-width: 30ch; margin: 0 0 2rem; font-size: 1.05rem; color: var(--sobre-esmeralda-2); }
+}
+
+.sala__titulo {
+  margin: 0 0 1rem;
+  font-size: clamp(3.2rem, 7vw, 6rem);
+  font-style: italic;
+  line-height: 0.95;
+}
+
+.sala__piezas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 1.6vw, 1.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ───────── Novedades ───────── */
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(2rem, 3vw, 3rem) clamp(0.75rem, 1.6vw, 1.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.esqueleto { display: grid; gap: 0.6rem; }
+.esqueleto__foto { display: block; aspect-ratio: 4 / 5; background: var(--piedra); animation: latir 1.6s ease-in-out infinite; }
+.esqueleto__linea { display: block; height: 0.8rem; width: 70%; background: var(--piedra); }
+.esqueleto__linea--corta { width: 40%; }
+
+@keyframes latir { 50% { opacity: 0.55; } }
+
+.estado {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--regla-suave);
+
+  p { margin: 0; color: var(--tinta-2); }
+}
+
+/* ───────── Metales ───────── */
+.metales {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  width: min(100% - 2 * var(--gutter), var(--ancho));
+  margin: var(--ritmo) auto 0;
+}
+
+.metales__titulo {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.4vw, 3.8rem);
+  line-height: 1.02;
+}
+
+.metales__lista { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--tinta); }
+
+.metal {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.25rem 1.5rem;
+  align-items: baseline;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--regla);
+  text-decoration: none;
+  transition: padding 0.4s var(--ease);
+
+  &:hover { padding-left: 0.75rem; }
+}
+
+.metal__nombre { font-family: var(--f-titular); font-size: clamp(1.6rem, 2.6vw, 2.2rem); line-height: 1.1; }
+.metal__definicion { grid-row: 2; color: var(--tinta-2); font-size: 0.95rem; }
+.metal__ir { grid-row: 1 / span 2; grid-column: 2; align-self: center; font-size: 0.9rem; font-weight: 500; text-decoration: underline; text-underline-offset: 0.25em; }
+
+/* ───────── Condiciones de compra: franja de piedra con lista reglada ───────── */
+.beneficios {
+  margin-top: var(--ritmo);
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
+  background: var(--piedra);
+}
+
+.beneficios__marco {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  width: min(100% - 2 * var(--gutter), var(--ancho));
+  margin-inline: auto;
+}
+
+.beneficios__titulo { margin: 0; font-size: clamp(2.2rem, 4.4vw, 3.8rem); line-height: 1.02; }
+
+.beneficios__lista {
+  margin: 0;
+  border-top: 1px solid var(--tinta);
+
+  div { display: grid; gap: 0.3rem; padding: 1.4rem 0; border-bottom: 1px solid var(--regla); }
+  dt { font-family: var(--f-titular); font-size: clamp(1.45rem, 2.3vw, 1.9rem); line-height: 1.15; }
+  dd { margin: 0; max-width: 46ch; color: var(--tinta-2); }
+}
+
+/* ───────── Tablet y móvil ───────── */
+@media (max-width: 63.99rem) {
+  .sala { grid-template-columns: 1fr; align-items: start; }
+  .rejilla { grid-template-columns: repeat(2, 1fr); }
+  .metales,
+  .beneficios__marco { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 47.99rem) {
+  .portada { height: clamp(500px, 78svh, 700px); }
+  .portada__foto { object-position: 58% 22%; }
+  .portada__acciones .boton { flex: 1 1 auto; }
+  .categorias__rejilla,
+  .rejilla { grid-template-columns: repeat(2, 1fr); }
+  .sala__piezas {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 68%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-right: calc(-1 * var(--gutter));
+    padding-right: var(--gutter);
+    scrollbar-width: none;
+
+    li { scroll-snap-align: start; }
+  }
+}

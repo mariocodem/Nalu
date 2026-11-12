@@ -1,0 +1,15 @@
+.encabezado { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem 1.25rem; margin-bottom: 1.25rem; }
+.encabezado h1 { margin: 0; }
+.fila-material {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  align-items: end;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--regla-suave);
+}
+.imagenes { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); list-style: none; padding: 0; margin: 0 0 1.25rem; }
+.imagenes li { border: 1px solid var(--regla-suave); padding: 0.5rem; display: grid; gap: 0.5rem; }
+.imagenes img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--fondo-2); }
+.imagenes .principal { color: var(--acento); font-size: 0.85rem; }
+.inactiva { color: var(--tinta-3); }

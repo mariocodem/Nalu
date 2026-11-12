@@ -1,0 +1,37 @@
+# Entorno local de Nalu: PostgreSQL + Mailpit.
+# Uso: cp .env.example .env (y ajusta los valores) && docker compose up -d
+services:
+  postgres:
+    image: postgres:18
+    container_name: nalu-postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME:-nalu}
+      POSTGRES_USER: ${DB_USER:-nalu}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Define DB_PASSWORD en .env}
+      TZ: UTC
+    ports:
+      # 5433 en el host para no chocar con un PostgreSQL local en 5432
+      - "127.0.0.1:${DB_PORT:-5433}:5432"
+    volumes:
+      # Desde la imagen 18, PGDATA vive en /var/lib/postgresql/18/docker
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: nalu-mailpit
+    ports:
+      - "127.0.0.1:8025:8025" # UI web: http://localhost:8025
+      - "127.0.0.1:1025:1025" # SMTP
+    healthcheck:
+      test: ["CMD", "/mailpit", "readyz"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  pgdata:

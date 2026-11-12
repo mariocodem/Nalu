@@ -1,0 +1,79 @@
+# Configuración base de Nalu. Los valores sensibles llegan por variables de entorno
+# (ver .env.example en la raíz). Sin valor por defecto, la aplicación no arranca: es intencional.
+spring:
+  application:
+    name: nalu-backend
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false            # las consultas ocurren en la capa de negocio, no al serializar
+    hibernate:
+      ddl-auto: validate           # el esquema lo gestiona Liquibase; Hibernate solo lo verifica
+    properties:
+      hibernate:
+        jdbc.time_zone: UTC
+        default_batch_fetch_size: 50
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  jackson:
+    deserialization:
+      fail-on-null-for-primitives: false   # un booleano omitido en el JSON vale false
+  mvc:
+    format:
+      date: iso          # ?desde=2026-11-09
+  messages:
+    basename: messages
+    fallback-to-system-locale: false   # messages.properties (español) es la base para cualquier idioma
+  servlet:
+    multipart:
+      max-file-size: 5MB      # imágenes de producto (api-fase1.md §4)
+      max-request-size: 6MB
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+
+nalu:
+  jwt:
+    secreto: ${JWT_SECRET}
+    emisor: ${JWT_ISSUER}
+    vida-access-token: ${JWT_ACCESS_TTL:15m}
+    inactividad-refresh: ${JWT_REFRESH_INACTIVIDAD:30m}
+    vida-maxima-refresh: ${JWT_REFRESH_MAXIMO:7d}
+  app:
+    url-frontend: ${APP_FRONTEND_URL}
+  ventas:
+    tarifa-envio: ${NALU_ENVIO_TARIFA:15000}
+    envio-gratis-desde: ${NALU_ENVIO_GRATIS_DESDE:200000}
+    reserva-ttl: ${RESERVA_TTL_MINUTOS:30}m
+    cancelacion-sin-pago: 24h
+  # Asistente de compras con IA (ADR 005). Sin GEMINI_API_KEY el asistente queda desactivado.
+  gemini:
+    llave-api: ${GEMINI_API_KEY:}
+    modelo: ${GEMINI_MODEL:gemini-flash-latest}
+    modelos-respaldo: ${GEMINI_MODELOS_RESPALDO:gemini-flash-lite-latest}
+  asistente:
+    mensajes-por-ventana: ${NALU_ASISTENTE_MENSAJES:20}
+    ventana: 10m
+  wompi:
+    llave-publica: ${WOMPI_PUBLIC_KEY:}
+    secreto-integridad: ${WOMPI_INTEGRITY_SECRET:}
+    secreto-eventos: ${WOMPI_EVENTS_SECRET:}
+  correo:
+    remitente: ${NALU_CORREO_REMITENTE:Nalu <no-responder@nalu.local>}
+  archivos:
+    directorio: ${NALU_ARCHIVOS_DIR:./uploads}
+  # Solo se usa en los perfiles dev y demo (DatosSemillaRunner)
+  admin:
+    correo: ${NALU_ADMIN_EMAIL}
+    contrasena: ${NALU_ADMIN_PASSWORD}

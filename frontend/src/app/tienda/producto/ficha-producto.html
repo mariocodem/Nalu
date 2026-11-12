@@ -1,0 +1,104 @@
+@if (noEncontrada()) {
+  <section class="pagina">
+    <h1>Esta pieza no está en la sala</h1>
+    <p class="nota">Puede que se haya retirado. <a routerLink="/catalogo">Ver las piezas disponibles</a></p>
+  </section>
+} @else if (ficha(); as f) {
+  <article class="ficha" [attr.aria-labelledby]="'nombre-pieza'">
+    <div class="ficha__vitrina">
+      <nav aria-label="Migas de pan" class="migas">
+        <a routerLink="/catalogo">Catálogo</a>
+        @for (m of f.migas; track m.slug) { <span aria-hidden="true">/</span> <a [routerLink]="['/catalogo', m.slug]">{{ m.nombre }}</a> }
+      </nav>
+      <div class="vitrina">
+        <span class="luz" aria-hidden="true"></span>
+        @if (f.imagenes[imagenActiva()]; as img) {
+          <img class="vitrina__foto" [src]="img.url" [alt]="img.textoAlternativo" width="900" height="900" fetchpriority="high" />
+        }
+      </div>
+      @if (f.imagenes.length > 1) {
+        <ul class="miniaturas" aria-label="Más fotografías">
+          @for (img of f.imagenes; track img.url; let i = $index) {
+            <li>
+              <button type="button" (click)="imagenActiva.set(i)" [attr.aria-pressed]="i === imagenActiva()"
+                      [attr.aria-label]="'Ver fotografía ' + (i + 1) + ': ' + img.textoAlternativo">
+                <img [src]="img.url" alt="" width="96" height="96" loading="lazy" />
+              </button>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+
+    <div class="cedula">
+      <h1 id="nombre-pieza" class="cedula__nombre">{{ f.nombre }}</h1>
+
+      @if (precio() !== null) {
+        <p class="cedula__precio">
+          @if (!variante() && variosPrecios()) { Desde }
+          {{ precio() | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+        </p>
+      }
+
+      @if (f.materiales.length) {
+        <dl class="cedula__datos">
+          @for (m of f.materiales; track m.nombre) {
+            <div>
+              <dt>{{ roles[m.rol] }}</dt>
+              <dd>
+                {{ m.nombre }}
+                @if (m.pesoGramos) { · {{ m.pesoGramos | number: '1.0-2' }} g }
+                @if (m.quilates) { · {{ m.quilates | number: '1.0-2' }} ct }
+                @if (m.requiereCertificado) { · con certificado }
+              </dd>
+            </div>
+          }
+        </dl>
+      }
+
+      @if (f.variantes.length > 1 || f.variantes[0]?.talla) {
+        <fieldset class="tallas">
+          <legend>Talla</legend>
+          <div class="tallas__opciones">
+            @for (v of f.variantes; track v.id) {
+              <button type="button" class="talla" [class.talla--elegida]="variante()?.id === v.id"
+                      [disabled]="!v.disponible" [attr.aria-pressed]="variante()?.id === v.id" (click)="elegir(v)"
+                      [attr.aria-label]="'Talla ' + (v.talla ?? 'única') + (v.disponible ? '' : ', agotada')">
+                {{ v.talla ?? 'Única' }}
+              </button>
+            }
+          </div>
+        </fieldset>
+      }
+
+      @if (f.agotado) {
+        <p class="cedula__agotada" role="status">Pieza agotada por ahora.</p>
+      } @else {
+        <button type="button" class="boton boton--oscuro" (click)="agregar()" [disabled]="agregando() || (variante() !== null && !variante()!.disponible)">
+          {{ agregando() ? 'Añadiendo…' : 'Añadir a la bolsa' }}
+        </button>
+      }
+      @if (mensaje(); as m) {
+        <p [class]="m.error ? 'cedula__agotada' : 'cedula__ok'" role="status">{{ m.texto }}
+          @if (!m.error) { <a routerLink="/bolsa">Ver la bolsa</a> }</p>
+      }
+
+      @if (f.descripcion) {
+        <div class="cedula__descripcion"><p>{{ f.descripcion }}</p></div>
+      }
+    </div>
+  </article>
+  @if (f.resenas?.total) {
+    <section class="resenas" aria-labelledby="t-resenas">
+      <h2 id="t-resenas">Lo que dicen quienes la llevan</h2>
+      <p class="resenas__promedio"><span aria-hidden="true">{{ estrellas(f.resenas.promedio ?? 0) }}</span>
+        <span class="sr">Calificación</span> {{ f.resenas.promedio }} de 5 · {{ f.resenas.total }} {{ f.resenas.total === 1 ? 'reseña' : 'reseñas' }}</p>
+      <ul>
+        @for (r of f.resenas.resenas; track $index) {
+          <li><p><span aria-label="{{ r.calificacion }} de 5">{{ estrellas(r.calificacion) }}</span> · {{ r.autor }}</p>
+            @if (r.comentario) { <p>{{ r.comentario }}</p> }</li>
+        }
+      </ul>
+    </section>
+  }
+}

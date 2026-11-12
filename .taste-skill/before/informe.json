@@ -1,0 +1,479 @@
+{
+  "fase": "before",
+  "fecha": "2026-11-09T18:46:49.898Z",
+  "anchos": {},
+  "paginas": {
+    "inicio": {
+      "360": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 5657,
+        "imagenesRotas": 0,
+        "imagenes": 9,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      },
+      "390": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 5814,
+        "imagenesRotas": 0,
+        "imagenes": 9,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      },
+      "768": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 3926,
+        "imagenesRotas": 0,
+        "imagenes": 9,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      },
+      "1280": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 2481,
+        "imagenesRotas": 0,
+        "imagenes": 9,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      },
+      "1440": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 2534,
+        "imagenesRotas": 0,
+        "imagenes": 9,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      }
+    },
+    "catalogo": {
+      "390": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 6019,
+        "imagenesRotas": 0,
+        "imagenes": 10,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      },
+      "1440": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 1496,
+        "imagenesRotas": 0,
+        "imagenes": 10,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      }
+    },
+    "ficha": {
+      "390": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 1132,
+        "imagenesRotas": 0,
+        "imagenes": 1,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      },
+      "1440": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 1077,
+        "imagenesRotas": 0,
+        "imagenes": 1,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      }
+    },
+    "bolsa": {
+      "390": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 900,
+        "imagenesRotas": 0,
+        "imagenes": 0,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      },
+      "1440": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 900,
+        "imagenesRotas": 0,
+        "imagenes": 0,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      }
+    },
+    "login": {
+      "390": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 900,
+        "imagenesRotas": 0,
+        "imagenes": 0,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      },
+      "1440": {
+        "estado": 200,
+        "desborde": 0,
+        "alto": 900,
+        "imagenesRotas": 0,
+        "imagenes": 0,
+        "erroresConsola": [
+          "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+        ],
+        "respuestasFallidas": [
+          "401 http://localhost:4200/api/v1/auth/refresh"
+        ]
+      }
+    }
+  },
+  "enlaces": {
+    "390": {
+      "total": 23,
+      "funcionales": 23,
+      "detalle": [
+        {
+          "href": "#contenido",
+          "ok": true
+        },
+        {
+          "href": "/",
+          "estado": 200,
+          "h1": "Esmeralda colombiana, a la luz de cada metal",
+          "ok": true
+        },
+        {
+          "href": "/catalogo",
+          "estado": 200,
+          "h1": "Todas las piezas",
+          "ok": true
+        },
+        {
+          "href": "/bolsa",
+          "estado": 200,
+          "h1": "Tu bolsa",
+          "ok": true
+        },
+        {
+          "href": "/cuenta/login",
+          "estado": 200,
+          "h1": "Ingresar",
+          "ok": true
+        },
+        {
+          "href": "/producto/anillo-trilogia-esmeralda",
+          "estado": 200,
+          "h1": "Anillo Trilogía Esmeralda",
+          "ok": true
+        },
+        {
+          "href": "/catalogo?material=2",
+          "estado": 200,
+          "h1": "Todas las piezas",
+          "ok": true
+        },
+        {
+          "href": "/catalogo?material=5",
+          "estado": 200,
+          "h1": "Todas las piezas",
+          "ok": true
+        },
+        {
+          "href": "/catalogo?material=4",
+          "estado": 200,
+          "h1": "Todas las piezas",
+          "ok": true
+        },
+        {
+          "href": "/catalogo?material=3",
+          "estado": 200,
+          "h1": "Todas las piezas",
+          "ok": true
+        },
+        {
+          "href": "/catalogo?material=1",
+          "estado": 200,
+          "h1": "Todas las piezas",
+          "ok": true
+        },
+        {
+          "href": "/producto/aretes-lagrima-de-esmeralda",
+          "estado": 200,
+          "h1": "Aretes Lágrima de Esmeralda",
+          "ok": true
+        },
+        {
+          "href": "/producto/dije-gota-de-esmeralda",
+          "estado": 200,
+          "h1": "Dije Gota de Esmeralda",
+          "ok": true
+        },
+        {
+          "href": "/producto/pulsera-eslabon-rolo",
+          "estado": 200,
+          "h1": "Pulsera Eslabón Rolo",
+          "ok": true
+        },
+        {
+          "href": "/producto/argollas-trenzadas",
+          "estado": 200,
+          "h1": "Argollas Trenzadas",
+          "ok": true
+        },
+        {
+          "href": "/producto/brazalete-abierto-gota",
+          "estado": 200,
+          "h1": "Brazalete Abierto Gota",
+          "ok": true
+        },
+        {
+          "href": "/producto/collar-lariat-gota",
+          "estado": 200,
+          "h1": "Collar Lariat Gota",
+          "ok": true
+        },
+        {
+          "href": "/producto/anillos-onda",
+          "estado": 200,
+          "h1": "Anillos Onda",
+          "ok": true
+        },
+        {
+          "href": "/producto/cadena-espiga",
+          "estado": 200,
+          "h1": "Cadena Espiga",
+          "ok": true
+        },
+        {
+          "href": "/catalogo/anillos",
+          "estado": 200,
+          "h1": "Anillos",
+          "ok": true
+        },
+        {
+          "href": "/catalogo/aretes",
+          "estado": 200,
+          "h1": "Aretes",
+          "ok": true
+        },
+        {
+          "href": "/catalogo/collares",
+          "estado": 200,
+          "h1": "Collares",
+          "ok": true
+        },
+        {
+          "href": "/catalogo/pulseras",
+          "estado": 200,
+          "h1": "Pulseras",
+          "ok": true
+        }
+      ]
+    },
+    "1440": {
+      "total": 23,
+      "funcionales": 23,
+      "detalle": [
+        {
+          "href": "#contenido",
+          "ok": true
+        },
+        {
+          "href": "/",
+          "estado": 200,
+          "h1": "Esmeralda colombiana, a la luz de cada metal",
+          "ok": true
+        },
+        {
+          "href": "/catalogo",
+          "estado": 200,
+          "h1": "Todas las piezas",
+          "ok": true
+        },
+        {
+          "href": "/bolsa",
+          "estado": 200,
+          "h1": "Tu bolsa",
+          "ok": true
+        },
+        {
+          "href": "/cuenta/login",
+          "estado": 200,
+          "h1": "Ingresar",
+          "ok": true
+        },
+        {
+          "href": "/producto/anillo-trilogia-esmeralda",
+          "estado": 200,
+          "h1": "Anillo Trilogía Esmeralda",
+          "ok": true
+        },
+        {
+          "href": "/catalogo?material=2",
+          "estado": 200,
+          "h1": "Todas las piezas",
+          "ok": true
+        },
+        {
+          "href": "/catalogo?material=5",
+          "estado": 200,
+          "h1": "Todas las piezas",
+          "ok": true
+        },
+        {
+          "href": "/catalogo?material=4",
+          "estado": 200,
+          "h1": "Todas las piezas",
+          "ok": true
+        },
+        {
+          "href": "/catalogo?material=3",
+          "estado": 200,
+          "h1": "Todas las piezas",
+          "ok": true
+        },
+        {
+          "href": "/catalogo?material=1",
+          "estado": 200,
+          "h1": "Todas las piezas",
+          "ok": true
+        },
+        {
+          "href": "/producto/aretes-lagrima-de-esmeralda",
+          "estado": 200,
+          "h1": "Aretes Lágrima de Esmeralda",
+          "ok": true
+        },
+        {
+          "href": "/producto/dije-gota-de-esmeralda",
+          "estado": 200,
+          "h1": "Dije Gota de Esmeralda",
+          "ok": true
+        },
+        {
+          "href": "/producto/pulsera-eslabon-rolo",
+          "estado": 200,
+          "h1": "Pulsera Eslabón Rolo",
+          "ok": true
+        },
+        {
+          "href": "/producto/argollas-trenzadas",
+          "estado": 200,
+          "h1": "Argollas Trenzadas",
+          "ok": true
+        },
+        {
+          "href": "/producto/brazalete-abierto-gota",
+          "estado": 200,
+          "h1": "Brazalete Abierto Gota",
+          "ok": true
+        },
+        {
+          "href": "/producto/collar-lariat-gota",
+          "estado": 200,
+          "h1": "Collar Lariat Gota",
+          "ok": true
+        },
+        {
+          "href": "/producto/anillos-onda",
+          "estado": 200,
+          "h1": "Anillos Onda",
+          "ok": true
+        },
+        {
+          "href": "/producto/cadena-espiga",
+          "estado": 200,
+          "h1": "Cadena Espiga",
+          "ok": true
+        },
+        {
+          "href": "/catalogo/anillos",
+          "estado": 200,
+          "h1": "Anillos",
+          "ok": true
+        },
+        {
+          "href": "/catalogo/aretes",
+          "estado": 200,
+          "h1": "Aretes",
+          "ok": true
+        },
+        {
+          "href": "/catalogo/collares",
+          "estado": 200,
+          "h1": "Collares",
+          "ok": true
+        },
+        {
+          "href": "/catalogo/pulseras",
+          "estado": 200,
+          "h1": "Pulseras",
+          "ok": true
+        }
+      ]
+    }
+  },
+  "axe": {
+    "390": [],
+    "1440": []
+  },
+  "formularios": {
+    "inicio": []
+  }
+}

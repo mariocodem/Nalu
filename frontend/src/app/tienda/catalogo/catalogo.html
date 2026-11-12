@@ -1,0 +1,93 @@
+<section class="catalogo">
+  @if (noEncontrada()) {
+    <h1>Esta colección no existe</h1>
+    <p class="nota"><a routerLink="/catalogo">Ver todas las piezas</a></p>
+  } @else {
+    <header class="catalogo__cabeza">
+      @if (detalle(); as d) {
+        <nav aria-label="Migas de pan" class="migas">
+          <a routerLink="/catalogo">Catálogo</a>
+          @for (m of d.migas; track m.slug) { <span aria-hidden="true">/</span> <a [routerLink]="['/catalogo', m.slug]">{{ m.nombre }}</a> }
+        </nav>
+        <h1>{{ d.nombre }}</h1>
+        @if (d.descripcion) { <p class="catalogo__intro">{{ d.descripcion }}</p> }
+        @if (d.hijos.length) {
+          <ul class="subcategorias">
+            @for (h of d.hijos; track h.slug) { <li><a [routerLink]="['/catalogo', h.slug]">{{ h.nombre }}</a></li> }
+          </ul>
+        }
+      } @else {
+        <h1>Todas las piezas</h1>
+        <ul class="subcategorias">
+          @for (c of categorias(); track c.slug) { <li><a [routerLink]="['/catalogo', c.slug]">{{ c.nombre }}</a></li> }
+        </ul>
+      }
+    </header>
+
+    <form class="filtros" (ngSubmit)="aplicar()" role="search" aria-label="Filtrar piezas">
+      <div class="campo filtros__buscar">
+        <label for="f-q">Buscar</label>
+        <input id="f-q" name="q" type="search" [(ngModel)]="q" placeholder="Anillo, esmeralda…" />
+      </div>
+      <div class="campo">
+        <label for="f-material">Material</label>
+        <select id="f-material" name="material" [(ngModel)]="material">
+          <option value="">Todos</option>
+          @for (m of materiales(); track m.id) { <option [value]="m.id">{{ nombreMaterial(m) }}</option> }
+        </select>
+      </div>
+      <div class="campo">
+        <label for="f-min">Precio desde</label>
+        <input id="f-min" name="precioMin" type="number" min="0" step="1000" inputmode="numeric" [(ngModel)]="precioMin" />
+      </div>
+      <div class="campo">
+        <label for="f-max">Precio hasta</label>
+        <input id="f-max" name="precioMax" type="number" min="0" step="1000" inputmode="numeric" [(ngModel)]="precioMax" />
+      </div>
+      <div class="campo">
+        <label for="f-orden">Ordenar</label>
+        <select id="f-orden" name="orden" [(ngModel)]="orden">
+          <option value="">Más recientes</option>
+          <option value="precioDesde,asc">Precio: menor a mayor</option>
+          <option value="precioDesde,desc">Precio: mayor a menor</option>
+          <option value="nombre,asc">Nombre</option>
+        </select>
+      </div>
+      <div class="campo campo--casilla filtros__casilla">
+        <input id="f-disponible" name="disponible" type="checkbox" [(ngModel)]="disponible" />
+        <label for="f-disponible">Solo disponibles</label>
+      </div>
+      <div class="acciones">
+        <button class="boton boton--primario" type="submit">Filtrar</button>
+        <button class="boton boton--secundario" type="button" (click)="limpiar()">Limpiar</button>
+      </div>
+    </form>
+
+    <div aria-live="polite" class="catalogo__estado">
+      @if (pagina(); as p) {
+        <p class="nota">{{ p.totalElementos }} {{ p.totalElementos === 1 ? 'pieza' : 'piezas' }}</p>
+      } @else if (cargando()) {
+        <p class="nota">Cargando piezas…</p>
+      }
+    </div>
+
+    @if (pagina(); as p) {
+      @if (p.contenido.length) {
+        <ul class="rejilla">
+          @for (prod of p.contenido; track prod.slug) {
+            <li><app-vitrina-pieza [producto]="prod" /></li>
+          }
+        </ul>
+      } @else {
+        <p class="vacio">No encontramos piezas con esos filtros. <button type="button" class="boton boton--enlace" (click)="limpiar()">Quitar filtros</button></p>
+      }
+      @if (p.totalPaginas > 1) {
+        <nav class="acciones paginacion" aria-label="Paginación">
+          <button class="boton boton--secundario boton--pequeno" type="button" [disabled]="p.pagina === 0" (click)="irA(p.pagina - 1)">Anterior</button>
+          <span>Página {{ p.pagina + 1 }} de {{ p.totalPaginas }}</span>
+          <button class="boton boton--secundario boton--pequeno" type="button" [disabled]="p.pagina + 1 >= p.totalPaginas" (click)="irA(p.pagina + 1)">Siguiente</button>
+        </nav>
+      }
+    }
+  }
+</section>

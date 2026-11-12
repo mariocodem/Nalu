@@ -1,0 +1,24 @@
+# Perfil de pruebas. La base de datos la aporta Testcontainers (@ServiceConnection);
+# estos valores solo satisfacen los placeholders obligatorios de application.yml.
+spring:
+  datasource:
+    url: jdbc:postgresql://reemplazado-por-testcontainers/nalu
+    username: nalu
+    password: nalu
+  mail:
+    host: localhost
+    port: 1025
+
+nalu:
+  jwt:
+    # Clave de 256 bits solo para pruebas (no es un secreto real)
+    secreto: bmFsdS1jbGF2ZS1kZS1wcnVlYmFzLTI1Ni1iaXRzISE=
+    emisor: http://localhost:8080
+  app:
+    url-frontend: http://localhost:4200
+  archivos:
+    directorio: ${java.io.tmpdir}/nalu-pruebas-archivos
+  wompi:
+    llave-publica: pub_test_nalu
+    secreto-integridad: test_integrity_nalu
+    secreto-eventos: test_events_nalu

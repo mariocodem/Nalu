@@ -1,0 +1,463 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-10T01:20:11+00:00",
+  "title": "Design System: Nalu",
+  "extensions": {
+    "colorMeta": {
+      "esmeralda-profunda": {
+        "role": "primary",
+        "displayName": "Esmeralda profunda",
+        "canonical": "#0e3b2e",
+        "tonalRamp": [
+          "#030e0a",
+          "#142a23",
+          "#2b493f",
+          "#446b5d",
+          "#658c7e",
+          "#8daea1",
+          "#b6d0c6",
+          "#e1f4ec"
+        ]
+      },
+      "esmeralda-profunda-2": {
+        "role": "primary",
+        "displayName": "Esmeralda profunda iluminada",
+        "canonical": "#134a3a",
+        "tonalRamp": [
+          "#010f09",
+          "#102b22",
+          "#264a3e",
+          "#3d6c5c",
+          "#5e8e7d",
+          "#88afa0",
+          "#b3d1c5",
+          "#def5ec"
+        ]
+      },
+      "sobre-esmeralda": {
+        "role": "primary",
+        "displayName": "Marfil sobre esmeralda",
+        "canonical": "#f4f1ea",
+        "tonalRamp": [
+          "#0c0b09",
+          "#262522",
+          "#44423e",
+          "#63615c",
+          "#85827c",
+          "#a7a5a0",
+          "#cbc9c5",
+          "#efeeeb"
+        ]
+      },
+      "sobre-esmeralda-2": {
+        "role": "primary",
+        "displayName": "Salvia sobre esmeralda",
+        "canonical": "#b9cbc2",
+        "tonalRamp": [
+          "#080c0a",
+          "#1f2723",
+          "#3a4540",
+          "#57655e",
+          "#77877f",
+          "#9ca9a2",
+          "#c2ccc7",
+          "#e9f1ed"
+        ]
+      },
+      "esmeralda": {
+        "role": "secondary",
+        "displayName": "Esmeralda de señal",
+        "canonical": "#0f6b4f",
+        "tonalRamp": [
+          "#001008",
+          "#012d1f",
+          "#114e3a",
+          "#267056",
+          "#4b9377",
+          "#7ab39b",
+          "#a8d5c1",
+          "#d7f7e9"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "canonical": "#141414",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "tinta-hover": {
+        "role": "neutral",
+        "displayName": "Tinta en hover",
+        "canonical": "#2e2e2e",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "tinta-2": {
+        "role": "neutral",
+        "displayName": "Tinta media",
+        "canonical": "#55524d",
+        "tonalRamp": [
+          "#0c0b09",
+          "#262522",
+          "#44423e",
+          "#64615c",
+          "#85827d",
+          "#a7a5a0",
+          "#cbc9c5",
+          "#f0eeec"
+        ]
+      },
+      "tinta-3": {
+        "role": "neutral",
+        "displayName": "Tinta suave",
+        "canonical": "#6b675f",
+        "tonalRamp": [
+          "#0c0b09",
+          "#272521",
+          "#44423c",
+          "#64615a",
+          "#86827a",
+          "#a8a59e",
+          "#cbc9c4",
+          "#f0eeea"
+        ]
+      },
+      "fondo": {
+        "role": "neutral",
+        "displayName": "Blanco",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "fondo-2": {
+        "role": "neutral",
+        "displayName": "Blanco cálido",
+        "canonical": "#f8f7f5",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252524",
+          "#424241",
+          "#62615f",
+          "#838280",
+          "#a5a5a3",
+          "#c9c9c8",
+          "#efeeed"
+        ]
+      },
+      "piedra": {
+        "role": "neutral",
+        "displayName": "Piedra fría",
+        "canonical": "#f3f2ef",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#252524",
+          "#424240",
+          "#62615f",
+          "#838280",
+          "#a6a5a3",
+          "#cac9c7",
+          "#efeeed"
+        ]
+      },
+      "regla": {
+        "role": "neutral",
+        "displayName": "Regla",
+        "canonical": "#cfccc6",
+        "tonalRamp": [
+          "#0c0b09",
+          "#262522",
+          "#44423e",
+          "#63615c",
+          "#84827d",
+          "#a7a5a0",
+          "#cbc9c5",
+          "#efeeec"
+        ]
+      },
+      "regla-suave": {
+        "role": "neutral",
+        "displayName": "Regla suave",
+        "canonical": "#e7e5e1",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#262523",
+          "#43423f",
+          "#63615e",
+          "#84827f",
+          "#a6a5a2",
+          "#cac9c7",
+          "#efeeed"
+        ]
+      },
+      "error": {
+        "role": "neutral",
+        "displayName": "Error",
+        "canonical": "#a3301b",
+        "tonalRamp": [
+          "#200000",
+          "#470c03",
+          "#732314",
+          "#a23a27",
+          "#c95d48",
+          "#e48976",
+          "#feb4a4",
+          "#ffe0d3"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Titular de la portada sobre la fotografía, máximo 11ch."
+      },
+      "display-italica": {
+        "displayName": "Display itálica",
+        "purpose": "Nombre de la sala Esmeralda; la itálica se reserva para la sala."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Títulos de sección; los bloques de dos columnas suben a clamp(2.2rem, 4.4vw, 3.8rem)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Nombres en listas regladas (metales, condiciones); categorías en clamp(1.35rem, 2vw, 1.75rem)."
+      },
+      "marca": {
+        "displayName": "Marca",
+        "purpose": "Logotipo tipográfico NALU en mayúsculas espaciadas (cabecera; en el pie clamp(2.6rem, 5vw, 3.6rem) y 0.3em)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Texto corrido de interfaz; bajadas de 30 a 46ch."
+      },
+      "pieza-nombre": {
+        "displayName": "Nombre de pieza",
+        "purpose": "Nombre del producto en la tarjeta; precio a 0.95rem con cifras tabulares."
+      },
+      "boton": {
+        "displayName": "Botón",
+        "purpose": "Texto de todos los botones, en caja normal."
+      },
+      "nav": {
+        "displayName": "Nav",
+        "purpose": "Enlaces de la cabecera."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Encabezado de un grupo de enlaces (menú «Joyería», menú móvil, pie), en mayúsculas; nunca encima de un titular."
+      }
+    },
+    "shadows": [
+      {
+        "name": "panel-desplegado",
+        "value": "0 30px 60px -40px rgb(20 20 20 / 0.35)",
+        "purpose": "Menú «Joyería» y búsqueda que bajan a todo el ancho desde la cabecera."
+      },
+      {
+        "name": "menu-flotante",
+        "value": "0 18px 40px -18px rgb(20 20 20 / 0.22)",
+        "purpose": "Menú de cuenta."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Única curva del sistema: salida larga y asentada."
+      },
+      {
+        "name": "control",
+        "value": "0.25s",
+        "purpose": "Color, fondo y borde de botones, campos e iconos."
+      },
+      {
+        "name": "subrayado",
+        "value": "0.4s",
+        "purpose": "Subrayado de navegación que crece desde la izquierda; desplazamiento de filas regladas."
+      },
+      {
+        "name": "desplegar",
+        "value": "clip-path inset(0 0 100% 0) a inset(0) en 0.4-0.45s",
+        "purpose": "Apertura del menú «Joyería» y de la búsqueda."
+      },
+      {
+        "name": "foto-hover",
+        "value": "scale(1.035-1.04) en 0.9-1s",
+        "purpose": "Acercamiento de la fotografía en tarjetas y categorías."
+      },
+      {
+        "name": "asentar",
+        "value": "scale(1.04) y opacidad 0.4 a reposo en 2.2s",
+        "purpose": "Entrada de la fotografía de portada; el titular emerge 18px en 1.2s con 0.25s de retraso."
+      },
+      {
+        "name": "latir",
+        "value": "opacidad 1 a 0.55, 1.6s ease-in-out infinito",
+        "purpose": "Esqueletos de carga."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "recorte-aviso",
+        "value": "30rem"
+      },
+      {
+        "name": "movil",
+        "value": "48rem"
+      },
+      {
+        "name": "tablet",
+        "value": "64rem"
+      },
+      {
+        "name": "escritorio-amplio",
+        "value": "80rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón primario",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Acción principal sobre blanco o piedra: tinta sólida, esquinas rectas.",
+      "html": "<button class=\"ds-btn ds-btn-primario\">Agregar a la bolsa</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.75rem 1.6rem;border:1px solid transparent;border-radius:0;font-family:var(--f-texto,'Hanken Grotesk',sans-serif);font-size:.95rem;font-weight:600;letter-spacing:.01em;cursor:pointer;transition:background .25s cubic-bezier(.16,1,.3,1),color .25s cubic-bezier(.16,1,.3,1),border-color .25s cubic-bezier(.16,1,.3,1);}.ds-btn:active{transform:translateY(1px);}.ds-btn:focus-visible{outline:2px solid #0f6b4f;outline-offset:3px;}.ds-btn-primario{background:#141414;color:#fff;}.ds-btn-primario:hover{background:#2e2e2e;}"
+    },
+    {
+      "name": "Botón secundario",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Acción alternativa o reintento: contorno fino de tinta que se rellena en hover.",
+      "html": "<button class=\"ds-btn ds-btn-secundario\">Reintentar</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.75rem 1.6rem;border:1px solid transparent;border-radius:0;font-family:var(--f-texto,'Hanken Grotesk',sans-serif);font-size:.95rem;font-weight:600;letter-spacing:.01em;cursor:pointer;transition:background .25s cubic-bezier(.16,1,.3,1),color .25s cubic-bezier(.16,1,.3,1),border-color .25s cubic-bezier(.16,1,.3,1);}.ds-btn:active{transform:translateY(1px);}.ds-btn:focus-visible{outline:2px solid #0f6b4f;outline-offset:3px;}.ds-btn-secundario{background:transparent;color:#141414;border-color:#141414;}.ds-btn-secundario:hover{background:#141414;color:#fff;}"
+    },
+    {
+      "name": "Botones sobre fotografía",
+      "kind": "button",
+      "refersTo": "button-claro",
+      "description": "Par de acciones de la portada: blanco sólido y contorno claro sobre imagen oscura.",
+      "html": "<div class=\"ds-foto\"><a class=\"ds-btn ds-btn-claro\" href=\"#\">Comprar ahora</a><a class=\"ds-btn ds-btn-contorno-claro\" href=\"#\">Ver novedades</a></div>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.75rem 1.6rem;border:1px solid transparent;border-radius:0;font-family:var(--f-texto,'Hanken Grotesk',sans-serif);font-size:.95rem;font-weight:600;letter-spacing:.01em;cursor:pointer;transition:background .25s cubic-bezier(.16,1,.3,1),color .25s cubic-bezier(.16,1,.3,1),border-color .25s cubic-bezier(.16,1,.3,1);}.ds-btn:active{transform:translateY(1px);}.ds-btn:focus-visible{outline:2px solid #0f6b4f;outline-offset:3px;}.ds-foto{display:flex;gap:.75rem;padding:2rem;background:#0b0b0b;}.ds-btn-claro{background:#fff;color:#141414;text-decoration:none;}.ds-btn-claro:hover{background:#f3f2ef;}.ds-btn-contorno-claro{background:transparent;color:#fff;border-color:rgb(255 255 255 / .7);text-decoration:none;}.ds-btn-contorno-claro:hover{background:#fff;color:#141414;border-color:#fff;}.ds-foto .ds-btn:focus-visible{outline-color:#fff;}"
+    },
+    {
+      "name": "Campo",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo de formulario: regla de 1px, foco con doble trazo de tinta.",
+      "html": "<label class=\"ds-campo\"><span>Correo</span><input type=\"email\" placeholder=\"tu@correo.com\"></label>",
+      "css": ".ds-campo{display:flex;flex-direction:column;gap:.4rem;font-family:'Hanken Grotesk',sans-serif;}.ds-campo span{font-size:.875rem;font-weight:600;letter-spacing:.01em;color:#55524d;}.ds-campo input{min-height:46px;padding:.65rem .85rem;background:#fff;color:#141414;border:1px solid #cfccc6;border-radius:0;font:inherit;font-size:16px;transition:border-color .25s cubic-bezier(.16,1,.3,1),box-shadow .25s cubic-bezier(.16,1,.3,1);}.ds-campo input::placeholder{color:#6b675f;}.ds-campo input:hover{border-color:#6b675f;}.ds-campo input:focus-visible{outline:none;border-color:#141414;box-shadow:inset 0 0 0 1px #141414;}"
+    },
+    {
+      "name": "Cabecera",
+      "kind": "nav",
+      "refersTo": "cabecera",
+      "description": "Aviso esmeralda y cabecera blanca: navegación a la izquierda, NALU centrado, acciones a la derecha.",
+      "html": "<div class=\"ds-aviso\">Envío gratis desde $300.000 · Enviamos a toda Colombia</div><header class=\"ds-cab\"><nav><a href=\"#\">Joyería</a><a href=\"#\">Esmeralda</a></nav><a class=\"ds-marca\" href=\"#\">Nalu</a><div class=\"ds-acc\"><svg viewBox=\"0 0 24 24\"><circle cx=\"10.5\" cy=\"10.5\" r=\"6\"/><path d=\"m15 15 5.5 5.5\"/></svg><svg viewBox=\"0 0 24 24\"><path d=\"M5 8.5h14l-1.1 12H6.1z\"/><path d=\"M9 10.5V7a3 3 0 0 1 6 0v3.5\"/></svg></div></header>",
+      "css": ".ds-aviso{background:#0e3b2e;color:#f4f1ea;text-align:center;font:400 .8rem/1.55 'Hanken Grotesk',sans-serif;letter-spacing:.03em;padding:.55rem 24px;}.ds-cab{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:64px;padding:0 24px;background:#fff;border-bottom:1px solid #e7e5e1;font-family:'Hanken Grotesk',sans-serif;}.ds-cab nav{display:flex;gap:1.5rem;}.ds-cab nav a{position:relative;padding:.6rem 0;color:#141414;font-size:.9rem;font-weight:500;text-decoration:none;}.ds-cab nav a::after{content:'';position:absolute;left:0;right:0;bottom:.3rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1);}.ds-cab nav a:hover::after{transform:scaleX(1);}.ds-cab a:focus-visible{outline:2px solid #0f6b4f;outline-offset:3px;}.ds-marca{font-family:'Bodoni Moda',Didot,serif;font-optical-sizing:none;font-variation-settings:'opsz' 28;font-size:1.7rem;font-weight:500;letter-spacing:.34em;padding-left:.34em;text-transform:uppercase;text-decoration:none;color:#141414;line-height:1;}.ds-acc{display:flex;justify-content:flex-end;gap:.75rem;}.ds-acc svg{width:22px;height:22px;fill:none;stroke:#141414;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}"
+    },
+    {
+      "name": "Tarjeta de pieza",
+      "kind": "card",
+      "refersTo": "vitrina-pieza",
+      "description": "Fotografía 4:5 sobre piedra con nombre, material y precio desde.",
+      "html": "<a class=\"ds-pieza\" href=\"#\"><span class=\"ds-pieza-foto\"><span class=\"ds-agotada\">Agotada</span></span><span class=\"ds-pieza-nombre\">Anillo Lía</span><span class=\"ds-pieza-mat\">Plata 925 · Esmeralda</span><span class=\"ds-pieza-precio\">Desde $189.000</span></a>",
+      "css": ".ds-pieza{display:grid;gap:.15rem;width:220px;color:#141414;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;}.ds-pieza-foto{position:relative;display:block;aspect-ratio:4/5;margin-bottom:.75rem;background:#f3f2ef;transition:transform .9s cubic-bezier(.16,1,.3,1);}.ds-agotada{position:absolute;top:.75rem;left:.75rem;padding:.25rem .6rem;background:#fff;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}.ds-pieza-nombre{font-size:.98rem;font-weight:500;line-height:1.35;text-underline-offset:.25em;}.ds-pieza:hover .ds-pieza-nombre{text-decoration:underline;text-decoration-thickness:1px;}.ds-pieza-mat{color:#6b675f;font-size:.88rem;}.ds-pieza-precio{margin-top:.25rem;font-size:.95rem;font-variant-numeric:tabular-nums;}.ds-pieza:focus-visible{outline:2px solid #0f6b4f;outline-offset:3px;}"
+    },
+    {
+      "name": "Sala Esmeralda",
+      "kind": "custom",
+      "refersTo": "sala-esmeralda",
+      "description": "Franja esmeralda a todo el ancho con el nombre en Bodoni itálica y botón claro.",
+      "html": "<section class=\"ds-sala\"><h2>Esmeralda</h2><p>La piedra en el centro de Nalu. Descubre las piezas que la llevan.</p><a class=\"ds-sala-btn\" href=\"#\">Ver las piezas con esmeralda</a></section>",
+      "css": ".ds-sala{padding:3.5rem 2rem;background:#0e3b2e;color:#f4f1ea;font-family:'Hanken Grotesk',sans-serif;}.ds-sala h2{margin:0 0 1rem;font-family:'Bodoni Moda',Didot,serif;font-optical-sizing:none;font-variation-settings:'opsz' 28;font-size:4rem;font-style:italic;font-weight:400;line-height:.95;}.ds-sala p{max-width:30ch;margin:0 0 2rem;font-size:1.05rem;color:#b9cbc2;}.ds-sala-btn{display:inline-flex;align-items:center;min-height:48px;padding:.75rem 1.6rem;background:#fff;color:#141414;font-size:.95rem;font-weight:600;text-decoration:none;transition:background .25s cubic-bezier(.16,1,.3,1);}.ds-sala-btn:hover{background:#f3f2ef;}.ds-sala-btn:focus-visible{outline:2px solid #fff;outline-offset:3px;}"
+    },
+    {
+      "name": "Lista reglada",
+      "kind": "custom",
+      "refersTo": "lista-reglada",
+      "description": "Filas separadas por reglas en lugar de tarjetas: nombre en Bodoni, definición en tinta media.",
+      "html": "<ul class=\"ds-lista\"><li><a href=\"#\"><span class=\"n\">Plata 925</span><span class=\"d\">Plata de ley, brillante y ligera.</span><span class=\"i\">Ver piezas</span></a></li><li><a href=\"#\"><span class=\"n\">Oro</span><span class=\"d\">Oro macizo para piezas de toda la vida.</span><span class=\"i\">Ver piezas</span></a></li></ul>",
+      "css": ".ds-lista{margin:0;padding:0;list-style:none;border-top:1px solid #141414;font-family:'Hanken Grotesk',sans-serif;}.ds-lista a{display:grid;grid-template-columns:1fr auto;gap:.25rem 1.5rem;align-items:baseline;padding:1.4rem 0;border-bottom:1px solid #cfccc6;color:#141414;text-decoration:none;transition:padding .4s cubic-bezier(.16,1,.3,1);}.ds-lista a:hover{padding-left:.75rem;}.ds-lista a:focus-visible{outline:2px solid #0f6b4f;outline-offset:3px;}.ds-lista .n{font-family:'Bodoni Moda',Didot,serif;font-optical-sizing:none;font-variation-settings:'opsz' 28;font-size:2rem;line-height:1.1;}.ds-lista .d{grid-row:2;color:#55524d;font-size:.95rem;}.ds-lista .i{grid-row:1/span 2;grid-column:2;align-self:center;font-size:.9rem;font-weight:500;text-decoration:underline;text-underline-offset:.25em;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "La revista que se puede comprar",
+    "overview": "Nalu se presenta como una revista de joyería: la fotografía manda, a gran tamaño y a sangre, sobre suelos blancos y de piedra fría; la compra se resuelve con la precisión sobria de una tienda bien hecha. Los titulares en Bodoni Moda ponen la voz editorial; Hanken Grotesk lleva toda la interfaz (navegación, precios, botones, formularios) sin adornos.\n\nEl color es casi todo tinta sobre blanco. El único color de marca, un esmeralda profundo, no aparece como acento suelto: ocupa franjas completas de lado a lado (el aviso de envío, la sala Esmeralda, el pie) y el bloque de la sala dentro del menú «Joyería». La forma es rectilínea: esquinas rectas, reglas de 1px y superficies planas en reposo. El movimiento es lento y asentado (curva de salida larga), y se apaga por completo con `prefers-reduced-motion`.\n\nDensidad editorial: secciones separadas por un ritmo vertical amplio, rejillas de fotografías en proporción 4:5 y listas regladas en lugar de filas de tarjetas.\n\nAlcance: este sistema se extrajo de la tienda pública (aviso, cabecera, menú «Joyería», búsqueda, menú de cuenta, menú móvil, inicio, tarjeta de pieza y pie). El panel de administración y las páginas de cuenta heredan los tokens y las utilidades globales (`.campo`, `.boton`, `.tabla`, `.panel-seccion`) pero no se rediseñaron; no se documentan aquí patrones propios de esas pantallas.",
+    "keyCharacteristics": [
+      "Fotografía grande sobre blanco puro y piedra fría; la imagen es la protagonista.",
+      "Tinta casi negra para texto y para toda acción interactiva.",
+      "Esmeralda profundo solo en franjas completas, más el anillo de foco y el estado de éxito.",
+      "Bodoni Moda en titulares con óptica fija 28; Hanken Grotesk en la interfaz.",
+      "Esquinas rectas, reglas de 1px, superficies planas.",
+      "Movimiento lento con una sola curva de salida."
+    ],
+    "rules": [
+      {
+        "name": "The Franja Completa Rule",
+        "body": "El esmeralda profundo ocupa franjas o bloques completos, nunca un botón, un enlace, un icono o un subrayado. Si un elemento de interacción necesita color, es tinta.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tinta Actúa Rule",
+        "body": "Toda acción interactiva (botón, enlace, navegación activa, casilla) se pinta en tinta; sobre franjas oscuras o fotografía se invierte a blanco (botón claro o de contorno claro).",
+        "section": "colors"
+      },
+      {
+        "name": "The Óptica 28 Rule",
+        "body": "Todo Bodoni (h1 a h3, marca, nombres editoriales) usa `font-optical-sizing: none` con `'opsz' 28`. Las ópticas altas pierden los trazos finos en pantalla; no subir la óptica aunque el tamaño crezca.",
+        "section": "typography"
+      },
+      {
+        "name": "The Una Voz Por Bloque Rule",
+        "body": "Bodoni para nombrar (titulares, categorías, metales, la sala); Hanken para todo lo que se lee para comprar (precios, materiales, botones, formularios). El nombre de una pieza en la tarjeta es Hanken.",
+        "section": "typography"
+      },
+      {
+        "name": "The Plano En Reposo Rule",
+        "body": "Nada que esté en el flujo de la página lleva sombra. La sombra solo separa un panel que se superpone al contenido.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** poner la fotografía primero: proporción 4:5 sobre piedra para producto y categoría, y a sangre en la portada.",
+      "**Do** usar tinta para toda acción; sobre fotografía o esmeralda, invertir a botón claro o de contorno claro.",
+      "**Do** usar el esmeralda profundo como franja o bloque completo, con texto marfil y salvia.",
+      "**Do** fijar Bodoni en `'opsz' 28` con `font-optical-sizing: none` en cualquier tamaño.",
+      "**Do** separar con reglas de 1px y listas regladas antes que con cajas.",
+      "**Do** animar con `cubic-bezier(0.16, 1, 0.3, 1)` y duraciones largas (0.25s en controles, 0.4 a 1s en subrayados y fotos, 2.2s en la portada), y apagar todo con `prefers-reduced-motion`."
+    ],
+    "donts": [
+      "**Don't** usar esmeralda en botones, enlaces, iconos, subrayados o hover; solo en franjas, en el anillo de foco y en el estado de éxito.",
+      "**Don't** redondear esquinas; la única excepción es el contador de la bolsa.",
+      "**Don't** poner sombra a nada que esté en el flujo de la página; la sombra es solo de paneles superpuestos.",
+      "**Don't** poner el nombre de una pieza, un precio o un botón en Bodoni.",
+      "**Don't** usar etiquetas en mayúsculas espaciadas encima de un titular; ese estilo es solo para encabezar grupos de enlaces y columnas de tabla."
+    ]
+  }
+}

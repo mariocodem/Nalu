@@ -1,0 +1,23 @@
+.catalogo { padding: clamp(1.5rem, 4vw, 3rem) var(--gutter) var(--ritmo); }
+.catalogo h1 { margin: 0 0 0.75rem; font-size: clamp(2rem, 5vw, 3.2rem); }
+.catalogo__intro { color: var(--tinta-2); max-width: 60ch; margin: 0 0 1rem; }
+.migas { display: flex; flex-wrap: wrap; gap: 0.5rem; font-size: 0.9rem; color: var(--tinta-3); margin-bottom: 0.75rem; }
+.subcategorias { list-style: none; padding: 0; margin: 0 0 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.subcategorias a { display: inline-block; padding: 0.45rem 0.9rem; border: 1px solid var(--regla); text-decoration: none; font-size: 0.92rem; }
+.subcategorias a:hover { border-color: var(--acento); color: var(--acento); }
+.filtros {
+  display: grid; gap: 0.9rem; align-items: end; padding: 1rem; margin-bottom: 1rem;
+  border: 1px solid var(--regla-suave); background: var(--fondo-2);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+}
+.filtros__buscar { grid-column: 1 / -1; }
+@media (min-width: 70rem) { .filtros__buscar { grid-column: span 2; } }
+.filtros__casilla { align-self: center; }
+.filtros .acciones { grid-column: 1 / -1; justify-content: flex-end; }
+.catalogo__estado { min-height: 1.5rem; }
+.rejilla {
+  list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(1rem, 2.5vw, 2rem);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+}
+.vacio { padding: 3rem 0; color: var(--tinta-2); }
+.paginacion { margin-top: 2rem; justify-content: center; }

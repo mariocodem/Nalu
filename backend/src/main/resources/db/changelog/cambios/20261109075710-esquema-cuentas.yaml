@@ -1,0 +1,252 @@
+# Esquema inicial del módulo de cuentas (F0-09): usuario, cliente, administrador y refresh_token.
+# Generado con scripts/liquibase-diff.sh y revisado a mano: nombres de PK y de la restricción única
+# implícita del @OneToOne reemplazadoPor.
+databaseChangeLog:
+- changeSet:
+    id: 1794229057949-1
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_administrador
+            name: id_usuario
+            type: BIGINT
+        tableName: administrador
+- changeSet:
+    id: 1794229057949-2
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: acepta_comunicaciones
+            type: BOOLEAN
+        - column:
+            name: documento
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: politica_aceptada_en
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_cliente
+            name: id_usuario
+            type: BIGINT
+        tableName: cliente
+- changeSet:
+    id: 1794229057949-3
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_refresh_token
+            name: id_refresh_token
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: creado_en
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: expira_en
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: familia
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: hash_token
+            type: VARCHAR(64)
+        - column:
+            name: ip
+            type: VARCHAR(45)
+        - column:
+            name: revocado_en
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: ultimo_uso
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            name: user_agent
+            type: VARCHAR(255)
+        - column:
+            name: id_reemplazado_por
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: id_usuario
+            type: BIGINT
+        tableName: refresh_token
+- changeSet:
+    id: 1794229057949-4
+    author: nalu
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: tipo_usuario
+            type: VARCHAR(20)
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_usuario
+            name: id_usuario
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: apellido
+            type: VARCHAR(60)
+        - column:
+            constraints:
+              nullable: false
+            name: contrasena_hash
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: correo
+            type: VARCHAR(120)
+        - column:
+            constraints:
+              nullable: false
+            name: estado
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: fecha_registro
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: nombre
+            type: VARCHAR(60)
+        - column:
+            name: telefono
+            type: VARCHAR(20)
+        tableName: usuario
+- changeSet:
+    id: 1794229057949-5
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: id_reemplazado_por
+        constraintName: uk_refresh_token_reemplazado_por
+        tableName: refresh_token
+- changeSet:
+    id: 1794229057949-6
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: hash_token
+        constraintName: uk_refresh_token_hash
+        tableName: refresh_token
+- changeSet:
+    id: 1794229057949-7
+    author: nalu
+    changes:
+    - addUniqueConstraint:
+        columnNames: correo
+        constraintName: uk_usuario_correo
+        tableName: usuario
+- changeSet:
+    id: 1794229057949-8
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: familia
+        indexName: idx_refresh_token_familia
+        tableName: refresh_token
+- changeSet:
+    id: 1794229057949-9
+    author: nalu
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: id_usuario
+        indexName: idx_refresh_token_usuario
+        tableName: refresh_token
+- changeSet:
+    id: 1794229057949-10
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_usuario
+        baseTableName: administrador
+        constraintName: fk_administrador_usuario
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_usuario
+        referencedTableName: usuario
+        validate: true
+- changeSet:
+    id: 1794229057949-11
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_usuario
+        baseTableName: cliente
+        constraintName: fk_cliente_usuario
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_usuario
+        referencedTableName: usuario
+        validate: true
+- changeSet:
+    id: 1794229057949-12
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_reemplazado_por
+        baseTableName: refresh_token
+        constraintName: fk_refresh_token_reemplazado_por
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_refresh_token
+        referencedTableName: refresh_token
+        validate: true
+- changeSet:
+    id: 1794229057949-13
+    author: nalu
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_usuario
+        baseTableName: refresh_token
+        constraintName: fk_refresh_token_usuario
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id_usuario
+        referencedTableName: usuario
+        validate: true
+

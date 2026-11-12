@@ -1,0 +1,205 @@
+<section class="pagina">
+  <p><a routerLink="/admin/productos">← Productos</a></p>
+  <div class="encabezado">
+    <h1>{{ producto()?.nombre ?? 'Nuevo producto' }}</h1>
+    @if (producto(); as p) {
+      <span [class]="'etiqueta-estado etiqueta-estado--' + p.estado.toLowerCase()">{{ nombresEstado[p.estado] }}</span>
+    }
+  </div>
+  @if (aviso(); as a) { <p class="aviso aviso--exito" role="status">{{ a }}</p> }
+
+  <!-- 1. Datos -->
+  <section class="panel-seccion" aria-labelledby="t-datos">
+    <h2 id="t-datos">Datos del producto</h2>
+    <form class="formulario" [formGroup]="datos" (ngSubmit)="guardarDatos()" novalidate>
+      @if (errores().general; as g) { <p class="aviso" role="alert">{{ g }}</p> }
+      <div class="formulario__fila">
+        <div class="campo">
+          <label for="p-nombre">Nombre</label>
+          <input id="p-nombre" formControlName="nombre" maxlength="120" [attr.aria-invalid]="!!errores().campos['nombre']" />
+          @if (errores().campos['nombre']; as e) { <p class="campo__error">{{ e }}</p> }
+        </div>
+        <div class="campo">
+          <label for="p-sku">SKU</label>
+          <input id="p-sku" formControlName="sku" maxlength="40" placeholder="ANI-LUNA" [attr.aria-invalid]="!!errores().campos['sku']" />
+          @if (errores().campos['sku']; as e) { <p class="campo__error">{{ e }}</p> }
+        </div>
+        <div class="campo">
+          <label for="p-slug">Slug (opcional)</label>
+          <input id="p-slug" formControlName="slug" maxlength="140" placeholder="Se genera del nombre" />
+          @if (errores().campos['slug']; as e) { <p class="campo__error">{{ e }}</p> }
+        </div>
+      </div>
+      <div class="formulario__fila">
+        <div class="campo">
+          <label for="p-categoria">Categoría</label>
+          <select id="p-categoria" formControlName="idCategoria">
+            <option [ngValue]="null" disabled>Elige una categoría</option>
+            @for (f of filasCategoria(); track f.categoria.id) {
+              <option [ngValue]="f.categoria.id">{{ '— '.repeat(f.nivel) }}{{ f.categoria.nombre }}{{ f.categoria.activa ? '' : ' (inactiva)' }}</option>
+            }
+          </select>
+        </div>
+        <div class="campo">
+          <label for="p-precio">Precio base (COP)</label>
+          <input id="p-precio" type="number" min="0.01" step="0.01" formControlName="precioBase"
+                 [attr.aria-invalid]="!!errores().campos['precioBase']" />
+          @if (errores().campos['precioBase']; as e) { <p class="campo__error">{{ e }}</p> }
+        </div>
+      </div>
+      <div class="campo">
+        <label for="p-descripcion">Descripción</label>
+        <textarea id="p-descripcion" formControlName="descripcion" maxlength="5000"></textarea>
+      </div>
+      <div class="acciones">
+        <button class="boton boton--primario" type="submit" [disabled]="datos.invalid || ocupado()">
+          {{ producto() ? 'Guardar datos' : 'Crear producto' }}</button>
+      </div>
+    </form>
+  </section>
+
+  @if (producto(); as p) {
+    <!-- 2. Materiales -->
+    <section class="panel-seccion" aria-labelledby="t-materiales">
+      <h2 id="t-materiales">Materiales</h2>
+      @if (erroresMateriales().general; as g) { <p class="aviso" role="alert">{{ g }}</p> }
+      <div class="formulario">
+        @for (fila of filas.controls; track $index; let i = $index) {
+          <div class="fila-material" [formGroup]="$any(fila)">
+            <div class="campo">
+              <label [for]="'m-' + i">Material</label>
+              <select [id]="'m-' + i" formControlName="idMaterial">
+                <option [ngValue]="null" disabled>Elige</option>
+                @for (m of materiales(); track m.id) { <option [ngValue]="m.id">{{ nombreMaterial(m) }}</option> }
+              </select>
+            </div>
+            <div class="campo">
+              <label [for]="'r-' + i">Rol</label>
+              <select [id]="'r-' + i" formControlName="rol">
+                @for (r of roles; track r) { <option [value]="r">{{ nombresRol[r] }}</option> }
+              </select>
+            </div>
+            <div class="campo">
+              <label [for]="'g-' + i">Peso (g)</label>
+              <input [id]="'g-' + i" type="number" step="0.01" min="0.01" formControlName="pesoGramos" />
+            </div>
+            <div class="campo">
+              <label [for]="'q-' + i">Quilates</label>
+              <input [id]="'q-' + i" type="number" step="0.01" min="0.01" formControlName="quilates" />
+            </div>
+            <button type="button" class="boton boton--secundario boton--pequeno" (click)="quitarMaterial(i)">Quitar</button>
+          </div>
+        }
+        <div class="acciones">
+          <button type="button" class="boton boton--secundario" (click)="agregarMaterial()">Añadir material</button>
+          <button type="button" class="boton boton--primario" (click)="guardarMateriales()" [disabled]="filas.invalid || ocupado()">
+            Guardar materiales</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Variantes -->
+    <section class="panel-seccion" aria-labelledby="t-variantes">
+      <h2 id="t-variantes">Variantes</h2>
+      @if (erroresVariante().general; as g) { <p class="aviso" role="alert">{{ g }}</p> }
+      <div class="tabla-contenedor">
+        <table class="tabla">
+          <thead><tr><th scope="col">SKU</th><th scope="col">Talla</th><th scope="col">Peso</th><th scope="col">Adicional</th>
+            <th scope="col">Existencia</th><th scope="col">Estado</th><th scope="col"><span class="sr">Acciones</span></th></tr></thead>
+          <tbody>
+            @for (v of p.variantes; track v.id) {
+              <tr [class.inactiva]="!v.activa">
+                <td>{{ v.sku }}</td><td>{{ v.talla ?? '—' }}</td><td>{{ v.pesoGramos ?? '—' }}</td>
+                <td>{{ v.precioAdicional | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</td>
+                <td>{{ v.stockActual }}@if (v.stockReservado) { ({{ v.stockReservado }} reservadas) }</td>
+                <td>{{ v.activa ? 'Activa' : 'Inactiva' }}</td>
+                <td class="acciones"><button type="button" class="boton boton--secundario boton--pequeno" (click)="alternarVariante(v)">
+                  {{ v.activa ? 'Desactivar' : 'Activar' }}</button>
+                  <a class="boton boton--secundario boton--pequeno" routerLink="/admin/inventario" [queryParams]="{ variante: v.id }">Movimientos</a></td>
+              </tr>
+            } @empty {
+              <tr><td colspan="7" class="nota">Sin variantes todavía.</td></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <h3>Nueva variante</h3>
+      <form class="formulario" [formGroup]="nuevaVariante" (ngSubmit)="crearVariante()" novalidate>
+        <div class="formulario__fila">
+          <div class="campo">
+            <label for="v-sku">SKU</label>
+            <input id="v-sku" formControlName="sku" maxlength="40" [attr.aria-invalid]="!!erroresVariante().campos['sku']" />
+            @if (erroresVariante().campos['sku']; as e) { <p class="campo__error">{{ e }}</p> }
+          </div>
+          <div class="campo"><label for="v-talla">Talla</label><input id="v-talla" formControlName="talla" maxlength="20" /></div>
+          <div class="campo"><label for="v-peso">Peso (g)</label><input id="v-peso" type="number" step="0.01" formControlName="pesoGramos" /></div>
+          <div class="campo"><label for="v-adicional">Precio adicional</label><input id="v-adicional" type="number" min="0" step="0.01" formControlName="precioAdicional" /></div>
+          <div class="campo"><label for="v-existencia">Existencia inicial</label><input id="v-existencia" type="number" min="0" step="1" formControlName="existenciaInicial" /></div>
+        </div>
+        <p class="nota">Después de crearla, la existencia solo cambia con movimientos de inventario.</p>
+        <div class="acciones">
+          <button class="boton boton--primario" type="submit" [disabled]="nuevaVariante.invalid || ocupado()">Crear variante</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- 4. Imágenes -->
+    <section class="panel-seccion" aria-labelledby="t-imagenes">
+      <h2 id="t-imagenes">Imágenes</h2>
+      @if (erroresImagen().general; as g) { <p class="aviso" role="alert">{{ g }}</p> }
+      <ul class="imagenes">
+        @for (img of p.imagenes; track img.id) {
+          <li>
+            <img [src]="img.url" [alt]="img.textoAlternativo" loading="lazy" />
+            <span class="nota">{{ img.textoAlternativo }}</span>
+            @if (img.principal) {
+              <span class="principal">Imagen principal</span>
+            } @else {
+              <button type="button" class="boton boton--secundario boton--pequeno" (click)="hacerPrincipal(img)">Hacer principal</button>
+            }
+            <button type="button" class="boton boton--secundario boton--pequeno" (click)="eliminarImagen(img)">Eliminar</button>
+          </li>
+        }
+      </ul>
+      <form class="formulario" [formGroup]="nuevaImagen" (ngSubmit)="subirImagen()" novalidate>
+        <div class="formulario__fila">
+          <div class="campo">
+            <label for="i-archivo">Archivo (JPEG, PNG o WebP, máx. 5 MB)</label>
+            <input id="i-archivo" type="file" accept="image/jpeg,image/png,image/webp" (change)="elegirArchivo($event)" />
+          </div>
+          <div class="campo">
+            <label for="i-alt">Texto alternativo</label>
+            <input id="i-alt" formControlName="textoAlternativo" maxlength="160" placeholder="Anillo de plata con cuarzo rosa, vista lateral" />
+          </div>
+        </div>
+        <div class="acciones">
+          <button class="boton boton--primario" type="submit" [disabled]="!archivo || nuevaImagen.invalid || ocupado()">Subir imagen</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- 5. SEO -->
+    <section class="panel-seccion" aria-labelledby="t-seo">
+      <h2 id="t-seo">SEO</h2>
+      <app-editor-seo tipo="productos" [idRecurso]="p.id" />
+    </section>
+
+    <!-- 6. Publicación -->
+    <section class="panel-seccion" aria-labelledby="t-estado">
+      <h2 id="t-estado">Publicación</h2>
+      @if (erroresEstado(); as e) { <p class="aviso" role="alert">{{ e }}</p> }
+      <p class="nota">Para publicar se necesitan una categoría activa, al menos un material, una variante activa y una imagen.</p>
+      <div class="acciones">
+        @if (p.estado !== 'PUBLICADO') {
+          <button type="button" class="boton boton--primario" (click)="cambiarEstado('PUBLICADO')" [disabled]="ocupado()">Publicar</button>
+        }
+        @if (p.estado !== 'BORRADOR') {
+          <button type="button" class="boton boton--secundario" (click)="cambiarEstado('BORRADOR')" [disabled]="ocupado()">Pasar a borrador</button>
+        }
+        @if (p.estado !== 'ARCHIVADO') {
+          <button type="button" class="boton boton--secundario" (click)="cambiarEstado('ARCHIVADO')" [disabled]="ocupado()">Archivar</button>
+        }
+      </div>
+    </section>
+  }
+</section>

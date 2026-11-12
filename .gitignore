@@ -1,0 +1,52 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Java
+*.class
+*.jar
+*.war
+target/
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+coverage/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary
+tmp/
+temp/
+
+# Archivos subidos en desarrollo
+uploads/
+
+# Llaves
+*.pem
+*.key
+
+# Maven wrapper (se versiona aunque *.jar esté ignorado)
+!.mvn/wrapper/maven-wrapper.jar
+# Informes de coordinación multiagente (Herdr)
+.herdr/
+
+# Respaldos de la base de datos (scripts/respaldo.sh)
+respaldos/
+
+# Fotos de terceros para la demostración en clase (scripts/demo): no se versionan
+scripts/demo/fotos/
+# Fotografías editoriales de terceros (solo uso académico): no se versionan
+frontend/public/editorial/
