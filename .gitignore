@@ -50,3 +50,6 @@ respaldos/
 scripts/demo/fotos/
 # Fotografías editoriales de terceros (solo uso académico): no se versionan
 frontend/public/editorial/
+
+# Python (scripts de QA)
+__pycache__/
