@@ -1,0 +1,764 @@
+[
+  {
+    "corrida": "Backend: JUnit 5, Spring Boot y Testcontainers",
+    "test_run": 1,
+    "resumen": "[Backend JUnit] Results for Nalu, entrega-final-36245c9, 2026-11-19 15:18",
+    "plan": "[Backend JUnit] Plan for Nalu (entrega-final-36245c9)",
+    "build": "2026-11-19 15:18",
+    "inicio": "20261119T15:18:47",
+    "fin": "20261119T15:19:06",
+    "conteo": {
+      "PASSED": 136
+    },
+    "ejecuciones": [
+      {
+        "caso": "ArquitecturaCapasTest.capas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "ArquitecturaCapasTest.controladoresSinEntidades",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "ArquitecturaCapasTest.metodosTransaccionalesSoloEnNegocio",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "ArquitecturaCapasTest.clasesTransaccionalesSoloEnNegocio",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "ArquitecturaCapasTest.sinTransaccionalDeJakarta",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "ArquitecturaCapasTest.sinJdbcDirecto",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "ArquitecturaCapasTest.sinConsultasNativasProgramaticas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "ArquitecturaCapasTest.sinAnotacionNativeQuery",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "ArquitecturaCapasTest.sinQueryNativa",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.NaluApplicationTests.contextLoads",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.admin.CatalogoAdminTest.skuYSlugRepetidosResponden409",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.admin.CatalogoAdminTest.criterioDeAceptacionUnProductoConDosMaterialesYTresTallasSePublica",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.admin.CatalogoAdminTest.unClienteNoPuedeAdministrarElCatalogo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.admin.CatalogoAdminTest.reemplazarMaterialesActualizaQuitaYAgrega",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.admin.CatalogoAdminTest.laBaseDeDatosImpideExistenciasNegativas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.admin.CatalogoAdminTest.unaImagenQueNoEsImagenSeRechaza",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.admin.CatalogoAdminTest.lasCategoriasFormanUnArbolSinCiclos",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.admin.OperacionTest.lasAccionesDelPanelYLosCambiosDePrecioQuedanAuditados",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.admin.OperacionTest.losMovimientosManualesNoTocanUnidadesReservadas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.admin.OperacionTest.soloQuienRecibioLaPiezaLaResenaYSePublicaTrasModerar",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.admin.OperacionTest.criterioDeAceptacionUnPedidoRecorreSuCicloYElReporteLoRefleja",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.admin.OperacionTest.cancelarUnPedidoPagadoExigeMotivoYReintegraLasUnidades",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CompraTest.unMontoDistintoNoApruebaElPedido",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CompraTest.siUnaLineaNoAlcanzaNoQuedaNadaAMedias",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CompraTest.unPagoAprobadoDescuentaElInventarioUnaSolaVez",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CompraTest.dosComprasSimultaneasDeLaUltimaUnidadSoloUnaObtieneLaReserva",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CompraTest.laCotizacionAplicaCuponYEnvioGratisDesdeElMinimo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CompraTest.crearElPedidoReservaConvierteElCarritoYPreparaElPago",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CompraTest.laReservaVencidaSeLiberaYElPedidoSinPagoSeCancelaALas24Horas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CompraTest.unaFirmaAlteradaSeRechazaSinTocarNada",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CompraTest.unPagoRechazadoLiberaLaReservaYSePuedeReintentar",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CompraTest.elCarritoDelVisitantePasaALaCuentaAlIniciarSesion",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CuentaClienteTest.elClienteConsultaYActualizaSuPerfil",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CuentaClienteTest.direccionIncompletaResponde400",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CuentaClienteTest.unAdministradorNoTienePerfilDeCliente",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CuentaClienteTest.lasDireccionesSeCreanEditanYDesactivan",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.CuentaClienteTest.laDireccionDeOtroClienteNoExiste",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.PagoPayuTest.unaRespuestaPendienteMantieneLaReserva",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.PagoPayuTest.unaRespuestaAlteradaSeRechazaSinTocarNada",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.PagoPayuTest.unaRespuestaAprobadaPagaElPedidoUnaSolaVez",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.PagoPayuTest.elPedidoTraeElFormularioFirmadoDePayu",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.PagoPayuTest.unaRespuestaRechazadaLiberaLaReservaYSePuedeReintentar",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.cliente.PagoPayuTest.soloElDuenoDelPedidoRegistraLaRespuesta",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.error.ManejadorErroresTest.accesoDenegadoLlegaASpringSecurityComo403",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.error.ManejadorErroresTest.metodoNoPermitidoDevuelve405EnEspanol",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.error.ManejadorErroresTest.errorInesperadoDevuelve500SinDetallesInternos",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.error.ManejadorErroresTest.rutaInexistenteDevuelve404EnEspanol",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.error.ManejadorErroresTest.jsonMalFormadoDevuelve400EnEspanol",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.error.ManejadorErroresTest.entradaValidaPasa",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.error.ManejadorErroresTest.recursoNoEncontradoDevuelve404",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.error.ManejadorErroresTest.entradaInvalidaDevuelve400ConTodosLosErroresEnEspanol",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.error.ManejadorErroresTest.conflictoDevuelve409",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AsistenteApiTest.soloUnClienteConSesionRecibeLasHerramientasDeSusPedidos",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AsistenteApiTest.laConversacionEmpiezaPorElClienteYTerminaConElMensajeNuevo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AsistenteApiTest.sinProveedorConfiguradoElAsistenteSeAnunciaNoDisponible",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AsistenteApiTest.validaLaSolicitudAntesDeLlamarAlModelo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AsistenteApiTest.lasTarjetasQueMuestraElAsistenteSalenDelCatalogoNoDelModelo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AsistenteApiTest.limitaLosMensajesPorPersona",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AsistenteApiTest.siElModeloNombraPiezasSinMostrarlasSeMuestranLasQueEncontroYNombro",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.meDevuelveElUsuarioDelToken",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.loginConDatosInvalidosResponde400ConLosErrores",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.tokenAlteradoResponde401",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.sinTokenResponde401EnProblemJson",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.tras30MinutosSinUsoElRefreshTokenCaduca",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.refreshExigeElOrigenDelFrontend",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.refreshSinCookieResponde401",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.loginCorrectoDevuelveLaSesionYLaCookieDelRefreshToken",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.healthEsPublico",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.corsSoloAdmiteElOrigenDelFrontend",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.contrasenaIncorrectaYCorreoInexistenteResponden401Iguales",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.refreshRotaElTokenYLaReutilizacionRevocaTodaLaFamilia",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.refreshDeUnAdministradorConservaSuRol",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.tokenExpiradoResponde401",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.rutasAdminExigenElRolAdministrador",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.AutenticacionTest.logoutRevocaLaSesionYBorraLaCookie",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.CatalogoPublicoTest.elPrecioDeVentaAplicaElFactorDelMetalPrincipal",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.CatalogoPublicoTest.laCategoriaPublicaTraeSuSeo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.CatalogoPublicoTest.filtrosPorCategoriaMaterialPrecioYDisponibilidad",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.CatalogoPublicoTest.elAdministradorEditaElSeoYLaFichaLoUsa",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.CatalogoPublicoTest.soloSeVeLoPublicadoDeCategoriasActivas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.RegistroYFuerzaBrutaTest.cincoFallosBloqueanElCorreoAunqueLaSextaContrasenaSeaCorrecta",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.RegistroYFuerzaBrutaTest.datosInvalidosResponden400ConCadaCampo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.RegistroYFuerzaBrutaTest.correoRepetidoResponde409",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.RegistroYFuerzaBrutaTest.registroCreaElClienteYDejaLaSesionIniciada",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.RegistroYFuerzaBrutaTest.sinAceptarLaPoliticaResponde400",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.api.publico.RegistroYFuerzaBrutaTest.unLoginCorrectoReiniciaLaCuentaDeFallos",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.config.JwtPropertiesTest.enlazaLosValoresYConvierteLasDuraciones",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.config.JwtPropertiesTest.rechazaLaConfiguracionSinEmisor",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.config.JwtPropertiesTest.rechazaUnaClaveDeMenosDe256Bits",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.CategoriaTest.moverAUnaRaizFunciona",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.CategoriaTest.moverAUnaCategoriaSobreSiMismaFalla",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.CategoriaTest.moverAUnaDescendienteFalla",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.CategoriaTest.moverAOtraRamaFunciona",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.MapeoCuentasTest.persisteClienteYAdministradorConHerenciaJoined",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.MapeoCuentasTest.elCorreoEsUnico",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.MapeoCuentasTest.persisteLaRotacionDeRefreshTokens",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.ProductoTest.publicarFallaSiNoTieneMateriales",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.ProductoTest.publicarFallaSiLaCategoriaEstaInactiva",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.ProductoTest.laPrimeraImagenQuedaComoPrincipal",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.ProductoTest.quitarLaImagenPrincipalReasignaLaDeMenorOrden",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.ProductoTest.reemplazarMaterialesConUnMaterialRepetidoFalla",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.ProductoTest.publicarFallaSiNoTieneImagenes",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.ProductoTest.marcarOtraImagenComoPrincipalDesmarcaLaAnterior",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.ProductoTest.publicarConTodosLosRequisitosCambiaElEstado",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.ProductoTest.publicarFallaSiNoTieneVariantesActivas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.RefreshTokenTest.revocarEsIdempotenteYNoSobrescribeLaFechaOriginal",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.RefreshTokenTest.lasRotacionesNoExtiendenElTopeAbsolutoDeLaSesion",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.RefreshTokenTest.unTokenRevocadoNoEstaVigente",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.RefreshTokenTest.elLoginAbreUnaFamiliaQueExpiraPorInactividad",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.RefreshTokenTest.rotarRevocaElTokenYDevuelveUnSucesorDeLaMismaFamilia",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.VarianteProductoTest.ajustarConRespaldoSuficienteActualizaLaExistencia",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.VarianteProductoTest.ajustarQueDejaReservasSinRespaldoFalla",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.VarianteProductoTest.reservarMasDeLoDisponibleFallaYNoAlteraLasReservas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.VarianteProductoTest.confirmarSalidaDescuentaReservaYExistencia",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.VarianteProductoTest.liberarDevuelveLasUnidadesSinBajarDeCero",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.datos.entidad.VarianteProductoTest.reservarDentroDeLoDisponibleDescuentaDelDisponible",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.gemini.GeminiModeloConversacionalTest.alAgotarLasRondasPideUnaRespuestaSinHerramientas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.gemini.GeminiModeloConversacionalTest.siElModeloPrincipalEstaSaturadoUsaElDeRespaldo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.gemini.GeminiModeloConversacionalTest.unRechazoQueNoEsTransitorioNoSeReintentaEnOtroModelo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.gemini.GeminiModeloConversacionalTest.aMitadDeTurnoNoCambiaDeModeloPorqueLasFirmasSonDelModeloQueLasProdujo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.gemini.GeminiModeloConversacionalTest.sinLlaveElAsistenteNoEstaDisponible",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.gemini.GeminiModeloConversacionalTest.unaRespuestaBloqueadaPorSeguridadSeReemplazaPorUnMensajeAmable",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.gemini.GeminiModeloConversacionalTest.devuelveElTurnoDelModeloConSuFirmaYLaRespuestaConElIdDeLaLlamada",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.gemini.GeminiModeloConversacionalTest.unModeloSaturadoQuedaEnPausaYLuegoSeVuelveAProbar",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.payu.PayuPasarelaTest.losEstadosDePayuSeTraducenAlVocabularioDelPuerto",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.payu.PayuPasarelaTest.laFirmaCoincideConElEjemploDeLaDocumentacionDePayu",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.payu.PayuPasarelaTest.laFirmaDeLaRespuestaRedondeaElValorAUnDecimal(String, String)[1]",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.payu.PayuPasarelaTest.laFirmaDeLaRespuestaRedondeaElValorAUnDecimal(String, String)[2]",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.payu.PayuPasarelaTest.laFirmaDeLaRespuestaRedondeaElValorAUnDecimal(String, String)[3]",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.payu.PayuPasarelaTest.laFirmaDeLaRespuestaRedondeaElValorAUnDecimal(String, String)[4]",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.payu.PayuPasarelaTest.elFormularioLlevaLosCamposDeWebCheckoutYSuFirma",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.payu.PayuPasarelaTest.unaRespuestaFirmadaSeTraduceAlEventoDelPuerto",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.integracion.payu.PayuPasarelaTest.unaRespuestaAlteradaIncompletaOMalFormadaSeRechaza",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.negocio.comun.FormateadorMensajesValidacionTest.campoObligatorio",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.negocio.comun.FormateadorMensajesValidacionTest.todasLasClavesDeYaviTienenTraduccion",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "co.nalu.negocio.comun.FormateadorMensajesValidacionTest.losMensajesPorDefectoSalenEnEspanol",
+        "estado": "PASSED"
+      }
+    ]
+  },
+  {
+    "corrida": "Frontend: Vitest",
+    "test_run": 2,
+    "resumen": "[Frontend Vitest] Results for Nalu, entrega-final-36245c9, 2026-11-19 15:18",
+    "plan": "[Frontend Vitest] Plan for Nalu (entrega-final-36245c9)",
+    "build": "2026-11-19 15:18",
+    "inicio": "20261119T15:19:07",
+    "fin": "20261119T15:19:11",
+    "conteo": {
+      "PASSED": 32
+    },
+    "ejecuciones": [
+      {
+        "caso": "src/app/admin/categorias/categorias.spec.ts.aplanar &gt; recorre el árbol en profundidad con su nivel",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/api/carrito.service.spec.ts.CarritoService &gt; guarda el token del visitante y lo envía en las siguientes llamadas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/api/pagos.service.spec.ts.PagosService &gt; envía a PayU un formulario POST con un campo oculto por cada dato firmado",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/api/pagos.service.spec.ts.PagosService &gt; reenvía al backend la respuesta de PayU tal como llegó",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/api/problema.spec.ts.erroresDe &gt; reparte los errores de validación por campo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/api/problema.spec.ts.erroresDe &gt; usa el detail como mensaje general en 401 y 409",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/api/problema.spec.ts.erroresDe &gt; informa la falta de conexión",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.interceptor.spec.ts.authInterceptor &gt; añade Bearer a las llamadas a /api/",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.interceptor.spec.ts.authInterceptor &gt; no añade Bearer al login ni a URLs externas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.interceptor.spec.ts.authInterceptor &gt; ante un 401 hace un refresh y reintenta una vez con el token nuevo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.interceptor.spec.ts.authInterceptor &gt; dos peticiones con 401 simultáneas comparten un solo refresh",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.interceptor.spec.ts.authInterceptor &gt; si el refresh falla limpia la sesión, navega al login y propaga el error original",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.interceptor.spec.ts.authInterceptor &gt; si el reintento falla por otro motivo, conserva la sesión y propaga ese error",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.service.spec.ts.AuthService &gt; login guarda token y usuario y envía correo y contraseña",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.service.spec.ts.AuthService &gt; dos refrescar() concurrentes comparten una sola petición",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.service.spec.ts.AuthService &gt; logout usa withCredentials y limpia la sesión aunque falle",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.service.spec.ts.AuthService &gt; en el servidor restaurarSesion no hace ninguna petición",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.service.spec.ts.AuthService &gt; un visitante que nunca inició sesión no pide refresh al arrancar",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.service.spec.ts.AuthService &gt; la marca de sesión se pone al iniciar sesión y se quita al cerrarla, sin guardar el token",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.service.spec.ts.AuthService &gt; restaurarSesion con 401 deja la sesión vacía, quita la marca y no lanza",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/auth.service.spec.ts.AuthService &gt; con Web Locks el refresh se hace dentro del bloqueo compartido entre pestañas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/rol.guard.spec.ts.rolGuard &gt; sin sesión redirige a /cuenta/login guardando el destino",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/rol.guard.spec.ts.rolGuard &gt; un CLIENTE en una ruta de ADMINISTRADOR vuelve a la portada",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/core/auth/rol.guard.spec.ts.rolGuard &gt; un ADMINISTRADOR puede entrar",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/cuenta/destino-seguro.spec.ts.destinoSeguro &gt; acepta rutas internas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/cuenta/destino-seguro.spec.ts.destinoSeguro &gt; rechaza redirecciones a otros sitios",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/cuenta/registro/registro.spec.ts.Registro &gt; no envía nada si falta aceptar la política",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/cuenta/registro/registro.spec.ts.Registro &gt; un correo ya registrado se muestra junto al campo",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/cuenta/registro/registro.spec.ts.Registro &gt; al registrarse guarda la sesión y vuelve al inicio",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/shared/asistente/formato.spec.ts.formato del asistente &gt; separa la negrita sin interpretar HTML",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/shared/asistente/formato.spec.ts.formato del asistente &gt; arma párrafos y listas con viñetas o números",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "src/app/shared/asistente/formato.spec.ts.formato del asistente &gt; descarta encabezados y asteriscos sueltos",
+        "estado": "PASSED"
+      }
+    ]
+  },
+  {
+    "corrida": "E2E HTTP contra el proyecto en marcha",
+    "test_run": 3,
+    "resumen": "[E2E HTTP] Results for Nalu, entrega-final-36245c9, 2026-11-19 15:18",
+    "plan": "[E2E HTTP] Plan for Nalu (entrega-final-36245c9)",
+    "build": "2026-11-19 15:18",
+    "inicio": "20261119T15:19:13",
+    "fin": "20261119T15:19:15",
+    "conteo": {
+      "PASSED": 12
+    },
+    "ejecuciones": [
+      {
+        "caso": "API: /actuator/health responde UP",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "Tienda SSR: el inicio se renderiza en el servidor con la marca y las novedades",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "Tienda SSR: el catálogo y la API pública listan las piezas publicadas",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "SEO: la ficha de producto trae título y JSON-LD Product",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "SEO: sitemap.xml y robots.txt disponibles",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "Seguridad: cabeceras del SSR (CSP con form-action a PayU, X-Frame-Options DENY, nosniff)",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "Autenticación: el administrador conserva el rol ADMINISTRADOR al renovar la sesión",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "Compra: registro, bolsa, dirección y pedido devuelven el formulario de PayU firmado en el servidor",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "Seguridad: la API del panel exige sesión (401) y rol de administrador (403)",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "Pagos: el sandbox de PayU acepta el formulario firmado (302 a su checkout)",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "Pagos: una respuesta de PayU con firma alterada se rechaza (401) sin tocar el pedido",
+        "estado": "PASSED"
+      },
+      {
+        "caso": "Pagos: una respuesta de rechazo firmada deja el pago RECHAZADO y el pedido pendiente para reintentar",
+        "estado": "PASSED"
+      }
+    ]
+  }
+]

@@ -77,3 +77,5 @@ Por primera vez se revisó la aplicación en un navegador real: Chromium sin int
 - Textos desactualizados o inexactos sobre la pasarela y la reserva.
 
 Pendiente de verificación manual: Firefox, Safari y Edge; Lighthouse; prueba de usabilidad con 5 personas (RNF08).
+
+**Registro en Kiwi TCMS:** las 180 ejecuciones (136 del backend, 32 del frontend y 12 E2E contra el proyecto en marcha) están publicadas en Kiwi TCMS; el informe con sus capturas está en [kiwi/informe-kiwi.md](kiwi/informe-kiwi.md) y se regenera con `scripts/kiwi/publicar.sh`.

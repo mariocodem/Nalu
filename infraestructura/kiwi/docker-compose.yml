@@ -1,0 +1,43 @@
+# Kiwi TCMS local para registrar las ejecuciones de pruebas de Nalu (docs/calidad/kiwi/).
+# Uso:
+#   docker compose -f infraestructura/kiwi/docker-compose.yml up -d
+#   scripts/kiwi-publicar.sh          # crea el usuario, publica los resultados y genera el informe
+# Interfaz: https://localhost:8443 (certificado autofirmado). Solo escucha en 127.0.0.1.
+services:
+  kiwi_db:
+    image: postgres:18
+    container_name: nalu-kiwi-db
+    environment:
+      POSTGRES_DB: kiwi
+      POSTGRES_USER: kiwi
+      # Herramienta local de QA: la base no sale del equipo
+      POSTGRES_PASSWORD: ${KIWI_DB_PASSWORD:-kiwi-local}
+    volumes:
+      - kiwi_db:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kiwi -d kiwi"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  kiwi_web:
+    image: kiwitcms/kiwi:17.1
+    container_name: nalu-kiwi
+    depends_on:
+      kiwi_db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8443:8443"
+    environment:
+      KIWI_DB_ENGINE: django.db.backends.postgresql
+      KIWI_DB_HOST: kiwi_db
+      KIWI_DB_PORT: 5432
+      KIWI_DB_NAME: kiwi
+      KIWI_DB_USER: kiwi
+      KIWI_DB_PASSWORD: ${KIWI_DB_PASSWORD:-kiwi-local}
+    volumes:
+      - kiwi_uploads:/Kiwi/uploads
+
+volumes:
+  kiwi_db:
+  kiwi_uploads:

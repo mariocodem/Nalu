@@ -85,6 +85,8 @@ Ninguna foto es de una pieza real de Nalu; precios y existencias son de ejemplo.
 
 ## Pruebas
 
+Último informe: **180 de 180 ejecuciones aprobadas**, registradas en Kiwi TCMS ([docs/calidad/kiwi/informe-kiwi.md](docs/calidad/kiwi/informe-kiwi.md)). Para repetirlo, con Nalu en marcha: `docker compose -f infraestructura/kiwi/docker-compose.yml up -d` y `scripts/kiwi/publicar.sh`.
+
 Backend (necesita Docker porque usa Testcontainers):
 
 ```bash
