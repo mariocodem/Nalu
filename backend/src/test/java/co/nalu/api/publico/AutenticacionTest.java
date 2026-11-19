@@ -222,6 +222,21 @@ class AutenticacionTest {
         mvc.perform(refresh(rotado)).andExpect(status().isUnauthorized());
     }
 
+    /** El usuario del refresh token llega como proxy perezoso de Usuario: el rol no se puede perder al renovar. */
+    @Test
+    void refreshDeUnAdministradorConservaSuRol() throws Exception {
+        var original = cookie(mvc.perform(login("admin@nalu.co", CONTRASENA)).andReturn());
+
+        var renovada = mvc.perform(refresh(original))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.usuario.roles[0]").value("ADMINISTRADOR"))
+                .andReturn().getResponse().getContentAsString();
+
+        String token = JsonPath.read(renovada, "$.accessToken");
+        mvc.perform(get("/api/v1/admin/categorias").header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
+                .andExpect(status().isOk());
+    }
+
     @Test
     void refreshExigeElOrigenDelFrontend() throws Exception {
         var cookie = cookie(mvc.perform(login("ana@nalu.co", CONTRASENA)).andReturn());

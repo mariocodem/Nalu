@@ -24,7 +24,12 @@
       }
     </header>
 
-    <form class="filtros" (ngSubmit)="aplicar()" role="search" aria-label="Filtrar piezas">
+    <button type="button" class="boton boton--secundario filtros__alternar" aria-controls="filtros"
+            [attr.aria-expanded]="filtrosAbiertos()" (click)="filtrosAbiertos.set(!filtrosAbiertos())">
+      Filtrar y ordenar@if (filtrosActivos()) { ({{ filtrosActivos() }}) }
+    </button>
+    <form id="filtros" class="filtros" [class.filtros--abiertos]="filtrosAbiertos()" (ngSubmit)="aplicar()"
+          role="search" aria-label="Filtrar piezas">
       <div class="campo filtros__buscar">
         <label for="f-q">Buscar</label>
         <input id="f-q" name="q" type="search" [(ngModel)]="q" placeholder="Anillo, esmeralda…" />
@@ -75,7 +80,7 @@
       @if (p.contenido.length) {
         <ul class="rejilla">
           @for (prod of p.contenido; track prod.slug) {
-            <li><app-vitrina-pieza [producto]="prod" /></li>
+            <li><app-vitrina-pieza [producto]="prod" [prioritaria]="$index < 4" /></li>
           }
         </ul>
       } @else {

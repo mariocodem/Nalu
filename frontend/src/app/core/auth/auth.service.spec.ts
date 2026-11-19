@@ -37,7 +37,10 @@ describe('AuthService', () => {
     httpMock = TestBed.inject(HttpTestingController);
   }
 
-  beforeEach(() => configurar('browser'));
+  beforeEach(() => {
+    localStorage.clear();
+    configurar('browser');
+  });
 
   afterEach(() => httpMock.verify());
 
@@ -109,7 +112,25 @@ describe('AuthService', () => {
     expect(servicio.usuario()).toBeNull();
   });
 
-  it('restaurarSesion con 401 deja la sesión vacía y no lanza', async () => {
+  it('un visitante que nunca inició sesión no pide refresh al arrancar', async () => {
+    await servicio.restaurarSesion();
+
+    httpMock.expectNone('/api/v1/auth/refresh');
+    expect(servicio.autenticado()).toBe(false);
+  });
+
+  it('la marca de sesión se pone al iniciar sesión y se quita al cerrarla, sin guardar el token', () => {
+    servicio.login('ana@nalu.local', 'secreta').subscribe();
+    httpMock.expectOne('/api/v1/auth/login').flush(SESION);
+    expect(localStorage.getItem(AuthService.MARCA_SESION)).toBe('1');
+    expect(JSON.stringify({ ...localStorage })).not.toContain('jwt-1');
+
+    servicio.limpiarSesion();
+    expect(localStorage.getItem(AuthService.MARCA_SESION)).toBeNull();
+  });
+
+  it('restaurarSesion con 401 deja la sesión vacía, quita la marca y no lanza', async () => {
+    localStorage.setItem(AuthService.MARCA_SESION, '1');
     const restauracion = servicio.restaurarSesion();
 
     const peticion = httpMock.expectOne('/api/v1/auth/refresh');
@@ -120,7 +141,9 @@ describe('AuthService', () => {
     expect(servicio.autenticado()).toBe(false);
     expect(servicio.accessToken()).toBeNull();
     expect(servicio.usuario()).toBeNull();
+    expect(localStorage.getItem(AuthService.MARCA_SESION)).toBeNull();
   });
+
   it('con Web Locks el refresh se hace dentro del bloqueo compartido entre pestañas', async () => {
     const solicitudes: string[] = [];
     const locksFalso = {

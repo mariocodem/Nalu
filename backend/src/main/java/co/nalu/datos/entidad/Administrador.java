@@ -47,4 +47,9 @@ public class Administrador extends Usuario {
     public OffsetDateTime getUltimoAcceso() {
         return ultimoAcceso;
     }
+
+    @Override
+    public boolean esAdministrador() {
+        return true;
+    }
 }

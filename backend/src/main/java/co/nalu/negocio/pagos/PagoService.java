@@ -16,6 +16,8 @@ import co.nalu.config.VentasProperties;
 import co.nalu.negocio.inventario.InventarioService;
 import co.nalu.negocio.notificaciones.EventosPedido;
 import co.nalu.negocio.pagos.PasarelaPagos.DatosPago;
+import co.nalu.negocio.pagos.PasarelaPagos.EventoTransaccion;
+import co.nalu.negocio.pagos.dto.PagoDtos.RespuestaRegistrada;
 import java.time.Clock;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -27,8 +29,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Confirmación de pagos por webhook (plan §6.4, RF12, RNF03) y reintento de pago. El estado de un
- * pedido solo cambia por un evento firmado de la pasarela, nunca por la redirección del navegador.
+ * Confirmación de pagos (plan §6.4, RF12, RNF03) y reintento de pago. El estado de un pedido solo
+ * cambia con datos firmados por la pasarela: el webhook de Wompi o la respuesta de PayU que el
+ * navegador reenvía (ADR 006). Una redirección sin firma nunca cambia nada.
  */
 @Service
 public class PagoService {
@@ -66,7 +69,28 @@ public class PagoService {
      */
     @Transactional
     public void procesarEvento(String cuerpo) {
+        procesar(pasarela.verificarEvento(cuerpo));
+    }
+
+    /**
+     * Respuesta firmada con la que la pasarela devuelve al cliente a la tienda (PayU, ADR 006). Se
+     * procesa igual que un evento, pero solo la puede registrar el dueño del pedido: la de otro
+     * cliente o una referencia desconocida → {@link RecursoNoEncontradoException} (404).
+     */
+    @Transactional
+    public RespuestaRegistrada registrarRespuesta(long idCliente, String cuerpo) {
         var evento = pasarela.verificarEvento(cuerpo);
+        // Se comprueba sin cargar el pedido: procesar() lo lee después con bloqueo.
+        if (!pagos.existsByReferenciaAndPedidoClienteId(evento.referencia(), idCliente)) {
+            throw new RecursoNoEncontradoException("El pedido no existe");
+        }
+        procesar(evento);
+        var pago = pagos.findByReferencia(evento.referencia()).orElseThrow();
+        var pedido = pago.getPedido();
+        return new RespuestaRegistrada(pedido.getNumeroPedido(), pedido.getEstado(), pago.getEstado());
+    }
+
+    private void procesar(EventoTransaccion evento) {
         var clave = evento.idTransaccion() + ":" + evento.estado();
         if (eventos.existsByClaveIdempotencia(clave)) {
             log.info("Evento de pago repetido, se ignora: {}", clave);

@@ -159,7 +159,8 @@
 /* ───────── Sala Esmeralda ───────── */
 .sala {
   display: grid;
-  grid-template-columns: minmax(16rem, 0.9fr) 2fr;
+  /* La columna del título nunca es más estrecha que «Esmeralda»: así no choca con las tarjetas. */
+  grid-template-columns: minmax(min-content, 0.9fr) 2fr;
   gap: clamp(2rem, 5vw, 5rem);
   align-items: end;
   margin-top: var(--ritmo);

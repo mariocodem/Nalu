@@ -230,6 +230,8 @@ Paleta de tinta sobre blanco y piedra, con un único color de marca que se usa e
 ### Named Rules
 **The Óptica 28 Rule.** Todo Bodoni (h1 a h3, marca, nombres editoriales) usa `font-optical-sizing: none` con `'opsz' 28`. Las ópticas altas pierden los trazos finos en pantalla; no subir la óptica aunque el tamaño crezca.
 
+**The Guion Rule.** Aun con la óptica 28, el guion, la raya y el travesaño de la «A» de Bodoni desaparecen a tamaño de titular. Los códigos que el cliente copia o dicta (número de pedido) van en Hanken dentro del titular, con la clase global `.numero-pedido` (0.72em, 500).
+
 **The Una Voz Por Bloque Rule.** Bodoni para nombrar (titulares, categorías, metales, la sala); Hanken para todo lo que se lee para comprar (precios, materiales, botones, formularios). El nombre de una pieza en la tarjeta es Hanken.
 
 ## Layout

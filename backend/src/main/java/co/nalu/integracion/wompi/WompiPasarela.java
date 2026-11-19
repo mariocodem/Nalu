@@ -10,6 +10,7 @@ import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.json.JsonMapper;
@@ -27,6 +28,7 @@ import tools.jackson.databind.json.JsonMapper;
  * </ul>
  */
 @Component
+@ConditionalOnProperty(name = "nalu.pagos.pasarela", havingValue = "wompi")
 public class WompiPasarela implements PasarelaPagos {
 
     static final String MONEDA = "COP";
@@ -55,7 +57,7 @@ public class WompiPasarela implements PasarelaPagos {
         var consulta = new StringBuilder();
         parametros.forEach((k, v) -> consulta.append(consulta.isEmpty() ? "?" : "&").append(k).append('=')
                 .append(URLEncoder.encode(v, StandardCharsets.UTF_8)));
-        return new DatosPago(props.urlCheckout() + consulta, referencia, montoCentavos, MONEDA);
+        return new DatosPago(props.urlCheckout() + consulta, referencia, montoCentavos, MONEDA, Map.of());
     }
 
     @Override

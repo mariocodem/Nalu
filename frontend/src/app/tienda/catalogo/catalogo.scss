@@ -11,13 +11,21 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
 }
 .filtros__buscar { grid-column: 1 / -1; }
+.filtros__alternar { display: none; }
+@media (max-width: 47.99rem) {
+  .filtros__alternar { display: flex; width: 100%; justify-content: center; margin-bottom: 1rem; }
+  .filtros:not(.filtros--abiertos) { display: none; }
+}
 @media (min-width: 70rem) { .filtros__buscar { grid-column: span 2; } }
 .filtros__casilla { align-self: center; }
 .filtros .acciones { grid-column: 1 / -1; justify-content: flex-end; }
 .catalogo__estado { min-height: 1.5rem; }
+/* DESIGN.md: 4 columnas en escritorio y 2 en tablet y móvil, como las rejillas del inicio. */
 .rejilla {
-  list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(1rem, 2.5vw, 2rem);
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  list-style: none; margin: 0; padding: 0; display: grid;
+  gap: clamp(2rem, 3vw, 3rem) clamp(0.75rem, 1.6vw, 1.5rem);
+  grid-template-columns: repeat(4, 1fr);
 }
+@media (max-width: 63.99rem) { .rejilla { grid-template-columns: repeat(2, 1fr); } }
 .vacio { padding: 3rem 0; color: var(--tinta-2); }
 .paginacion { margin-top: 2rem; justify-content: center; }

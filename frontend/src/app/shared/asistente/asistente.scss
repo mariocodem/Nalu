@@ -28,6 +28,14 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round
   &:hover { background: var(--tinta-hover); }
 }
 
+/* En pantallas estrechas, solo el icono para no tapar el contenido; el texto queda para lectores de pantalla. */
+@media (max-width: 47.99rem) {
+  .lanzador {
+    width: 48px; padding: 0; justify-content: center;
+    span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  }
+}
+
 /* ───────── Panel ───────── */
 .panel {
   position: fixed;

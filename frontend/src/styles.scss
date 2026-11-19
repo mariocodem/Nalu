@@ -437,3 +437,15 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * Número de pedido dentro de un titular: Bodoni Moda dibuja el guion como un trazo tan fino que
+ * desaparece y «NALU-ZE8PAP» se leería «NALU ZE8PAP». Se compone en la letra de texto.
+ */
+.numero-pedido {
+  font-family: var(--f-texto);
+  font-size: 0.72em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}

@@ -4,6 +4,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { catchError, of, switchMap } from 'rxjs';
+import { PagosService } from '../../core/api/pagos.service';
 import { NOMBRES_ESTADO_PEDIDO, PedidosService } from '../../core/api/pedidos.service';
 import { erroresDe } from '../../core/api/problema';
 
@@ -15,7 +16,7 @@ import { erroresDe } from '../../core/api/problema';
       <p><a routerLink="/cuenta/pedidos">← Mis pedidos</a></p>
       @if (error(); as e) { <p class="aviso" role="alert">{{ e }}</p> }
       @if (pedido(); as p) {
-        <h1>Pedido {{ p.numero }}</h1>
+        <h1>Pedido <span class="numero-pedido">{{ p.numero }}</span></h1>
         <p>{{ estados[p.estado] }} · {{ p.fecha | date: 'medium' }}</p>
         @if (p.puedePagar) {
           <p><button type="button" class="boton boton--primario" (click)="pagar(p.numero)">Pagar ahora</button></p>
@@ -76,6 +77,7 @@ import { erroresDe } from '../../core/api/problema';
 export class DetallePedido {
   readonly numero = input.required<string>();
   private readonly pedidos = inject(PedidosService);
+  private readonly pagos = inject(PagosService);
   protected readonly estados = NOMBRES_ESTADO_PEDIDO;
   protected readonly error = signal<string | null>(null);
   protected readonly pedido = toSignal(
@@ -104,8 +106,8 @@ export class DetallePedido {
   }
 
   protected pagar(numero: string): void {
-    this.pedidos.reintentarPago(numero).subscribe({
-      next: (pago) => window.location.assign(pago.urlPago),
+    this.pagos.reintentar(numero).subscribe({
+      next: (pago) => this.pagos.irAPasarela(pago),
       error: (e: unknown) => this.error.set(erroresDe(e).general),
     });
   }

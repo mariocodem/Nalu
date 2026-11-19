@@ -72,10 +72,16 @@ La aplicación está en <http://localhost:4200>. El servidor de desarrollo redir
 Con el backend en marcha:
 
 ```bash
-node --env-file=.env scripts/demo/cargar-demo.mjs
+node --env-file=.env scripts/demo/cargar-demo.mjs               # crea las piezas que falten
+node --env-file=.env scripts/demo/cargar-demo.mjs --actualizar  # además sincroniza nombre, descripción y fotos de las existentes
 ```
 
-Crea y publica 9 piezas con fotografías a través de la API de administración. Se puede ejecutar varias veces: salta los SKU que ya existen. Las fotos de `scripts/demo/fotos/` y las editoriales del inicio (`frontend/public/editorial/`) son de terceros, solo para uso académico, y no se versionan; precios y existencias son de ejemplo. Sin la carpeta editorial, la portada y las categorías del inicio se ven sin fotografía.
+Crea y publica 20 piezas con fotografías a través de la API de administración. Se puede ejecutar varias veces: salta los SKU que ya existen. Las fotos no se versionan:
+
+- 14 son de Unsplash y Pexels (licencias de uso libre). El script las descarga solo si faltan; los créditos están en [scripts/demo/CREDITOS-FOTOS.md](scripts/demo/CREDITOS-FOTOS.md).
+- Las de las otras 6 piezas y las editoriales del inicio (`frontend/public/editorial/`) son de terceros, solo para uso académico, y hay que copiarlas a mano. Sin la carpeta editorial, la portada y las categorías del inicio se ven sin fotografía.
+
+Ninguna foto es de una pieza real de Nalu; precios y existencias son de ejemplo.
 
 ## Pruebas
 
@@ -101,7 +107,13 @@ También se puede ejecutar `npx ng test --watch=false` desde `frontend`. La inte
 - `scripts/respaldo.sh`: respaldo de la base de datos con retención de 7 días. Prográmalo cada 24 horas (cron).
 - `scripts/restaurar.sh <archivo.dump> [base]`: restaura un respaldo en una base nueva sin tocar la actual.
 - `node scripts/prueba-carga.mjs [urlApi] [usuarios] [segundos]`: prueba de carga (RNF06).
-- Pagos: Wompi en modo sandbox con las llaves `WOMPI_*` de `.env`. Configura en el panel de Wompi la URL de eventos `https://<tu-api>/api/v1/webhooks/wompi` (en local necesitas un túnel público, como `cloudflared` o `ngrok`).
+- Pagos (ADR 006): la pasarela activa la elige `NALU_PASARELA` (`payu` por defecto, o `wompi`).
+  - **PayU sandbox** funciona sin configurar nada: usa las credenciales públicas de prueba de PayU. Para probar, compra en la tienda, pulsa «Pagar» y paga en PayU con la tarjeta de prueba VISA `4097440000000004`:
+    - Aprobado: titular `APPROVED`, CVV `777`, mes de vencimiento menor que 6 (por ejemplo, `05/2030`).
+    - Rechazado: titular `REJECTED`, CVV `666`, mes de vencimiento mayor que 6 (por ejemplo, `07/2030`).
+
+    Al volver a `/pago/resultado`, Nalu verifica la firma y actualiza el pedido.
+  - **Wompi sandbox** usa las llaves `WOMPI_*` de `.env`. Configura en el panel de Wompi la URL de eventos `https://<tu-api>/api/v1/webhooks/wompi` (en local necesitas un túnel público, como `cloudflared` o `ngrok`).
 
 ## Cambios de esquema
 

@@ -57,7 +57,8 @@ public class SeguridadConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/asistente/mensajes").permitAll() // pedidos solo con token de cliente
                         .requestMatchers(HttpMethod.POST, "/api/v1/carrito/fusionar").hasRole("CLIENTE")
                         .requestMatchers("/api/v1/carrito", "/api/v1/carrito/**").permitAll() // visitante con X-Cart-Token
-                        .requestMatchers("/api/v1/checkout/**", "/api/v1/pedidos/**").hasRole("CLIENTE")
+                        .requestMatchers("/api/v1/checkout/**", "/api/v1/pedidos/**", "/api/v1/pagos/**")
+                                .hasRole("CLIENTE")
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMINISTRADOR")
                         .requestMatchers("/api/v1/cuenta/**").hasRole("CLIENTE")
                         .requestMatchers(HttpMethod.GET, "/archivos/**").permitAll()

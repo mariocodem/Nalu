@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PagoRepository extends JpaRepository<Pago, Long> {
 
     Optional<Pago> findByReferencia(String referencia);
+
+    boolean existsByReferenciaAndPedidoClienteId(String referencia, Long idCliente);
 }

@@ -65,6 +65,17 @@ nalu:
   asistente:
     mensajes-por-ventana: ${NALU_ASISTENTE_MENSAJES:20}
     ventana: 10m
+  # Pasarela de pagos activa: payu (WebCheckout) o wompi (ADR 006)
+  pagos:
+    pasarela: ${NALU_PASARELA:payu}
+  # Por defecto, las credenciales públicas de prueba del sandbox de PayU para Colombia: no son
+  # secretas. Una cuenta propia se configura con PAYU_* en .env; la API key nunca llega al navegador.
+  payu:
+    merchant-id: ${PAYU_MERCHANT_ID:508029}
+    account-id: ${PAYU_ACCOUNT_ID:512321}
+    api-key: ${PAYU_API_KEY:4Vj8eK4rloUd272L48hsrarnUA}
+    url-checkout: ${PAYU_URL:https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/}
+    prueba: ${PAYU_PRUEBA:true}
   wompi:
     llave-publica: ${WOMPI_PUBLIC_KEY:}
     secreto-integridad: ${WOMPI_INTEGRITY_SECRET:}

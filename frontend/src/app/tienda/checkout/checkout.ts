@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../core/api/carrito.service';
 import { CuentaService } from '../../core/api/cuenta.service';
 import { Direccion } from '../../core/api/modelos';
+import { PagosService } from '../../core/api/pagos.service';
 import { Cotizacion, PedidosService } from '../../core/api/pedidos.service';
 import { erroresDe } from '../../core/api/problema';
 
@@ -67,9 +68,9 @@ import { erroresDe } from '../../core/api/problema';
             </dl>
             <button type="button" class="boton boton--primario pagar" (click)="pagar()"
                     [disabled]="!idDireccion || enviando() || c.faltantes.length > 0">
-              {{ enviando() ? 'Reservando tus piezas…' : 'Pagar con Wompi' }}
+              {{ enviando() ? 'Reservando tus piezas…' : 'Pagar' }}
             </button>
-            <p class="nota">Reservamos tus piezas 30 minutos mientras completas el pago. Pagas en la plataforma segura de Wompi: Nalu no recibe los datos de tu tarjeta.</p>
+            <p class="nota">Reservamos tus piezas 30 minutos mientras completas el pago. Pagas en una plataforma de pagos segura: Nalu no recibe los datos de tu tarjeta.</p>
           } @else if (!error()) {
             <p class="nota">Calculando…</p>
           }
@@ -95,6 +96,7 @@ import { erroresDe } from '../../core/api/problema';
 })
 export class Checkout implements OnInit {
   private readonly pedidos = inject(PedidosService);
+  private readonly pagos = inject(PagosService);
   private readonly cuenta = inject(CuentaService);
   private readonly carrito = inject(CarritoService);
 
@@ -127,7 +129,7 @@ export class Checkout implements OnInit {
     this.pedidos.crear(this.idDireccion, cupon).subscribe({
       next: (p) => {
         this.carrito.vaciarLocal();
-        window.location.assign(p.pago.urlPago);
+        this.pagos.irAPasarela(p.pago);
       },
       error: (e: unknown) => {
         this.enviando.set(false);

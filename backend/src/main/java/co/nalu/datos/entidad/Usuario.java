@@ -96,6 +96,13 @@ public abstract class Usuario {
         this.telefono = telefono;
     }
 
+    /**
+     * Tipo de cuenta. Es un método y no un {@code instanceof} porque un usuario que llega por una
+     * relación perezosa (p. ej. {@code RefreshToken.usuario}) es un proxy de {@code Usuario}: el proxy
+     * no es instancia de la subclase, pero sí delega este método en la entidad real.
+     */
+    public abstract boolean esAdministrador();
+
     public Long getId() {
         return id;
     }

@@ -123,4 +123,9 @@ public class Cliente extends Usuario {
     public List<Direccion> getDirecciones() {
         return List.copyOf(direcciones);
     }
+
+    @Override
+    public boolean esAdministrador() {
+        return false;
+    }
 }

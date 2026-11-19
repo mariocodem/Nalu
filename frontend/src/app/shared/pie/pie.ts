@@ -46,7 +46,7 @@ import { CONDICIONES_VENTA } from '../../core/tienda/condiciones-venta';
           <ul>
             <li>Envío a toda Colombia por {{ condiciones.envioTarifaPlana | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</li>
             <li>Gratis desde {{ condiciones.envioGratisDesde | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</li>
-            <li>Pago en línea con Wompi</li>
+            <li>Pago seguro en línea</li>
           </ul>
         </div>
       </div>

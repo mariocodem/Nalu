@@ -1,7 +1,6 @@
 package co.nalu.negocio.cuentas;
 
 import co.nalu.config.JwtProperties;
-import co.nalu.datos.entidad.Administrador;
 import co.nalu.datos.entidad.Usuario;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -54,7 +53,8 @@ public class TokenService {
     }
 
     public List<String> roles(Usuario usuario) {
-        return List.of(usuario instanceof Administrador ? ROL_ADMINISTRADOR : ROL_CLIENTE);
+        // No usar instanceof: en el refresh el usuario es un proxy perezoso de Usuario (ver Usuario#esAdministrador).
+        return List.of(usuario.esAdministrador() ? ROL_ADMINISTRADOR : ROL_CLIENTE);
     }
 
     /** Valor opaco de 256 bits en Base64 URL, sin relleno. Se entrega al cliente y no se guarda. */

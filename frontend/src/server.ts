@@ -15,7 +15,8 @@ const angularApp = new AngularNodeAppEngine();
 /**
  * Cabeceras de seguridad de todas las respuestas. La CSP se limita a lo que no interfiere con la
  * hidratación de Angular: nadie puede incrustar la tienda en un iframe (clickjacking), los
- * formularios solo envían a Nalu o a Wompi y no se cargan plugins.
+ * formularios solo envían a Nalu o a las pasarelas de pago (PayU, sandbox y producción, y Wompi;
+ * ADR 006) y no se cargan plugins.
  */
 app.use((_req, res, next) => {
   res.set({
@@ -24,7 +25,8 @@ app.use((_req, res, next) => {
     'X-Frame-Options': 'DENY',
     'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
     'Content-Security-Policy':
-      "frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self' https://checkout.wompi.co",
+      "frame-ancestors 'none'; base-uri 'self'; object-src 'none'; " +
+      "form-action 'self' https://sandbox.checkout.payulatam.com https://checkout.payulatam.com https://checkout.wompi.co",
   });
   next();
 });

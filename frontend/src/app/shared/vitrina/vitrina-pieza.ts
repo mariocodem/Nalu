@@ -11,7 +11,8 @@ import { ProductoTarjeta } from '../../core/api/tienda.service';
     <a class="pieza" [class.pieza--sobre-color]="sobreColor()" [routerLink]="['/producto', producto().slug]">
       <div class="pieza__foto">
         @if (producto().imagen; as img) {
-          <img [src]="img.url" [alt]="img.textoAlternativo" loading="lazy" width="640" height="800" />
+          <img [src]="img.url" [alt]="img.textoAlternativo" width="640" height="800"
+               [attr.loading]="prioritaria() ? 'eager' : 'lazy'" [attr.fetchpriority]="prioritaria() ? 'high' : null" />
         } @else {
           <span class="pieza__sin-foto">Fotografía pendiente</span>
         }
@@ -58,4 +59,6 @@ export class VitrinaPieza {
   readonly producto = input.required<ProductoTarjeta>();
   /** La tarjeta se apoya sobre una franja de color (sala Esmeralda): ajusta los tonos secundarios. */
   readonly sobreColor = input(false);
+  /** Primera fila visible al cargar: la foto se pide de inmediato porque suele ser el LCP. */
+  readonly prioritaria = input(false);
 }

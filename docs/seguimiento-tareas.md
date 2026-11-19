@@ -71,6 +71,9 @@ Contrato: `docs/arquitectura/api-fase3.md`.
 | F4-03 | Notificaciones por correo tras el commit | C | F4-01 | COMPLETADO | `negocio/notificaciones/`, `integracion/correo/` | Correo «Recibimos tu pago» en Mailpit en la prueba de punta a punta |
 | F3-05 | Frontend: bolsa, checkout, resultado del pago, mis pedidos, cupones en el panel | C | F3-04 | COMPLETADO | `tienda/bolsa`, `tienda/checkout`, `tienda/pago`, `cuenta/pedidos`, `admin/promociones` | 25 pruebas Vitest; compra de punta a punta con servidores reales |
 | P-04 | Verificar un pago real en el sandbox de Wompi | P | F4-01 | PENDIENTE | `.env` | Requiere las llaves sandbox del propietario |
+| F4-04 | PayU WebCheckout (sandbox): formulario firmado, verificación de la página de respuesta y selección de pasarela por configuración (ADR 006) | C | F4-01 | COMPLETADO | `integracion/payu/`, `negocio/pagos/`, `api/cliente/PagoController`, `SeguridadConfig`, `application.yml` | `PayuPasarelaTest` (9: firma del ejemplo oficial, campos, redondeo, alteraciones) y `PagoPayuTest` (6: aprobado una sola vez, rechazado + reintento, pendiente, firma alterada 401, otro cliente 404). El sandbox acepta el formulario (302 a su checkout) |
+| F4-05 | Frontend: formulario POST a la pasarela y registro de la respuesta de PayU | C | F4-04 | COMPLETADO | `core/api/pagos.service.ts`, `tienda/checkout`, `tienda/pago`, `cuenta/pedidos/detalle-pedido`, `server.ts` (CSP `form-action`) | 2 pruebas Vitest nuevas (30 en total); `ng build` sin errores |
+| P-07 | Probar en el navegador un pago aprobado y uno rechazado en el sandbox de PayU | P | F4-05 | COMPLETADO | — | Hecho por Claude el 2026-11-19 con Chromium automatizado contra el sandbox real: aprobado (NALU-ZE8PAP → `PAGADO`, correo «Recibimos tu pago») y rechazado (NALU-EM7YM8 → pago `RECHAZADO`, reserva liberada). El propietario puede repetirlo con los pasos del README |
 
 ## Fase 5
 
@@ -118,6 +121,21 @@ Informe: `docs/calidad/informe-de-calidad.md`.
 | IA-03 | Endpoints públicos y seguridad | C | IA-01 | COMPLETADO | `api/publico/AsistenteController`, `SeguridadConfig`, `ManejadorErrores` | `ArquitecturaCapasTest` en verde |
 | IA-04 | Chat en la tienda: botón «Asesora», panel, tarjetas con «Añadir a la bolsa» | C | IA-03 | EN REVISIÓN | `frontend/src/app/shared/asistente/` | Vitest 28/28; 12 comprobaciones en navegador con Gemini real (escritorio y móvil). Falta la validación visual del propietario |
 | IA-05 | Política de datos: mencionar el tratamiento por Google y revisar los términos de la Gemini API antes de producción | P | IA-04 | PENDIENTE | — | — |
+
+## Entrega final (2026-11-19)
+
+Revisión completa con la aplicación en marcha: Chromium sin interfaz controlado por el protocolo DevTools (capturas a 390, 1024 y 1366 px, más los errores de consola y las respuestas HTTP ≥ 400 de cada página) en la tienda, la cuenta, el checkout, PayU y las 10 pantallas del panel.
+
+| ID | Descripción | Resp. | Depende de | Estado | Archivos | Pruebas / resultado |
+|---|---|---|---|---|---|---|
+| EF-01 | Catálogo de demostración: 11 piezas nuevas y 3 fotos de baja resolución (225–554 px) reemplazadas por fotos de 1600 px de Unsplash y Pexels; descarga automática y modo `--actualizar` | C | — | COMPLETADO | `scripts/demo/cargar-demo.mjs`, `scripts/demo/CREDITOS-FOTOS.md` | 21 piezas publicadas; segunda ejecución sin cambios (idempotente) |
+| EF-02 | **Defecto:** al renovar la sesión, el administrador recibía el rol `CLIENTE` (el usuario del refresh token es un proxy perezoso y `instanceof Administrador` daba falso); al recargar o a los 15 min quedaba fuera del panel | C | — | COMPLETADO | `Usuario`, `Administrador`, `Cliente`, `TokenService` | `AutenticacionTest.refreshDeUnAdministradorConservaSuRol` (falla con el código anterior); las 10 pantallas del panel resisten la recarga |
+| EF-03 | Cada visita anónima dejaba un 401 de `/auth/refresh` en la consola: ahora solo se intenta restaurar la sesión si hubo una (marca sin secretos en `localStorage`) | C | — | COMPLETADO | `core/auth/auth.service.ts` | 2 pruebas Vitest nuevas; consola limpia en las páginas públicas |
+| EF-04 | Catálogo: 1 columna en móvil (DESIGN.md pide 2) y los filtros ocupaban toda la primera pantalla; ahora 4/2 columnas y filtros plegables en móvil | C | — | COMPLETADO | `tienda/catalogo/` | Captura a 390 px: piezas visibles en la primera pantalla |
+| EF-05 | Primera fila del catálogo con `loading="lazy"` siendo el LCP (aviso NG0913) | C | — | COMPLETADO | `shared/vitrina/vitrina-pieza.ts`, `tienda/catalogo/catalogo.html` | Sin el aviso en consola |
+| EF-06 | Título «Esmeralda» pegado a las tarjetas entre 1024 y 1366 px; botón «Asesora» tapando contenido en móvil (ahora solo el icono) | C | — | COMPLETADO | `tienda/inicio/inicio.scss`, `shared/asistente/asistente.scss` | Separación de 51 px (1024) y 68 px (1366) |
+| EF-07 | Bodoni borra el guion: «NALU-ZE8PAP» se leía «NALU ZE8PAP» en los titulares de pedido | C | — | COMPLETADO | `styles.scss` (`.numero-pedido`), detalle de pedido (cliente y panel), DESIGN.md (Guion Rule) | Captura a 390 px |
+| EF-08 | Textos: «Pago con Wompi» en el pie y el inicio (la pasarela activa es PayU); el rechazo decía que las piezas seguían apartadas (se liberan); código `DECLINED` sin traducir | C | — | COMPLETADO | `shared/pie/pie.ts`, `tienda/inicio/inicio.html`, `tienda/pago/resultado-pago.ts` | Revisado en el flujo de rechazo real |
 
 ## Tareas del propietario
 

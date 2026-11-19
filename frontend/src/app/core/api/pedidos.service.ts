@@ -24,7 +24,10 @@ export interface Cotizacion {
   lineas: LineaCotizada[]; subtotal: number; descuento: number; costoEnvio: number; total: number;
   cupon: { codigo: string; aplicado: boolean; mensaje: string | null } | null; faltantes: string[];
 }
-export interface DatosPago { urlPago: string; referencia: string; montoCentavos: number; moneda: string }
+/** Sin `campos`, el navegador va a `urlPago` (Wompi); con campos, se envían en un formulario POST (PayU). */
+export interface DatosPago {
+  urlPago: string; referencia: string; montoCentavos: number; moneda: string; campos: Record<string, string>;
+}
 export interface PedidoCreado { numero: string; estado: EstadoPedido; total: number; reservaExpiraEn: string; pago: DatosPago }
 export interface PedidoResumen { numero: string; fecha: string; estado: EstadoPedido; total: number; piezas: number }
 export interface LineaPedido {
@@ -49,10 +52,6 @@ export class PedidosService {
 
   crear(idDireccion: number, codigoCupon: string | null): Observable<PedidoCreado> {
     return this.http.post<PedidoCreado>('/api/v1/pedidos', { idDireccion, codigoCupon });
-  }
-
-  reintentarPago(numero: string): Observable<DatosPago> {
-    return this.http.post<DatosPago>(`/api/v1/pedidos/${encodeURIComponent(numero)}/reintentar-pago`, null);
   }
 
   misPedidos(pagina = 0): Observable<Pagina<PedidoResumen>> {

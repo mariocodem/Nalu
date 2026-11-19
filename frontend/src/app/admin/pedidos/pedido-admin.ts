@@ -15,7 +15,7 @@ import { erroresDe } from '../../core/api/problema';
       <p><a routerLink="/admin/pedidos">← Pedidos</a></p>
       @if (error(); as e) { <p class="aviso" role="alert">{{ e }}</p> }
       @if (detalle(); as d) {
-        <h1>Pedido {{ d.pedido.numero }}</h1>
+        <h1>Pedido <span class="numero-pedido">{{ d.pedido.numero }}</span></h1>
         <p><span class="etiqueta-estado">{{ nombres[d.pedido.estado] }}</span> · {{ d.pedido.fecha | date: 'medium' }} · {{ d.pedido.total | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</p>
 
         <section class="panel-seccion">

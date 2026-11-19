@@ -19,13 +19,19 @@ import { Sesion, UsuarioSesion } from './sesion.model';
  *
  * <p>El access token y el usuario viven solo en memoria (signals); nunca se usan
  * localStorage ni sessionStorage. El refresh token viaja en una cookie HttpOnly que
- * administra el navegador.
+ * administra el navegador. En localStorage solo queda una marca sin secretos
+ * ({@link AuthService.MARCA_SESION}) que indica si vale la pena intentar restaurar la sesión.
  */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
   private static readonly URL_BASE = '/api/v1/auth';
   static readonly BLOQUEO_REFRESH = 'nalu-auth-refresh';
+  /**
+   * Marca de que este navegador inició sesión. Sin ella, la app no pide un refresh al arrancar:
+   * a un visitante anónimo le respondería 401 y dejaría un error en la consola en cada página.
+   */
+  static readonly MARCA_SESION = 'nalu-sesion';
 
   private readonly http = inject(HttpClient);
   private readonly plataforma = inject(PLATFORM_ID);
@@ -112,6 +118,7 @@ export class AuthService {
   limpiarSesion(): void {
     this._accessToken.set(null);
     this._usuario.set(null);
+    this.marcarSesion(false);
   }
 
   /**
@@ -119,11 +126,11 @@ export class AuthService {
    *
    * <p>En el servidor no se hace nada: la cookie HttpOnly no viaja al renderizador
    * de Angular y una llamada a la API durante el SSR no aportaría sesión. En el
-   * navegador se prueba el refresh y un fallo (por ejemplo 401) deja la app sin
-   * sesión sin romper el arranque.
+   * navegador se prueba el refresh solo si hubo una sesión ({@link AuthService.MARCA_SESION});
+   * un fallo (por ejemplo 401) deja la app sin sesión sin romper el arranque.
    */
   async restaurarSesion(): Promise<void> {
-    if (isPlatformServer(this.plataforma)) {
+    if (isPlatformServer(this.plataforma) || !this.huboSesion()) {
       return;
     }
 
@@ -153,5 +160,24 @@ export class AuthService {
   private guardarSesion(sesion: Sesion): void {
     this._accessToken.set(sesion.accessToken);
     this._usuario.set(sesion.usuario);
+    this.marcarSesion(true);
+  }
+
+  /** El almacenamiento puede no existir (SSR) o estar bloqueado (modo privado estricto). */
+  private huboSesion(): boolean {
+    try {
+      return localStorage.getItem(AuthService.MARCA_SESION) !== null;
+    } catch {
+      return true; // sin almacenamiento, se intenta el refresh como antes
+    }
+  }
+
+  private marcarSesion(activa: boolean): void {
+    try {
+      if (activa) localStorage.setItem(AuthService.MARCA_SESION, '1');
+      else localStorage.removeItem(AuthService.MARCA_SESION);
+    } catch {
+      // Sin almacenamiento: la próxima carga intentará el refresh, como antes.
+    }
   }
 }

@@ -33,11 +33,14 @@ interface ItemCarrito {
   - Una sola transacción: bloqueo de las variantes en orden de id, verificación de existencias (`409` con `faltantes[]`), precios del servidor, cupón (`409` si no aplica), reserva de 30 min, pedido con historial y pago `INICIADO`, carrito `CONVERTIDO`.
   - Envío: $15.000, gratis si `subtotal − descuento ≥ $200.000`.
   - Número `NALU-XXXXXX` (6 caracteres sin 0/O/1/I/L).
-- `DatosPago { urlPago, referencia, montoCentavos, moneda }`: el navegador va a `urlPago` (checkout web de Wompi, con la firma de integridad). Referencia `NUMERO-intento`.
+- `DatosPago { urlPago, referencia, montoCentavos, moneda, campos }`. Referencia `NUMERO-intento`. Depende de la pasarela activa (`nalu.pagos.pasarela`, ADR 006):
+  - PayU (por defecto): el navegador envía `campos` a `urlPago` en un formulario POST: `merchantId`, `accountId`, `description`, `referenceCode`, `amount` (pesos sin decimales), `tax`, `taxReturnBase`, `currency`, `signature` = MD5(`ApiKey~merchantId~referenceCode~amount~currency`), `test`, `buyerEmail` y `responseUrl` (`/pago/resultado?pedido=NUMERO`).
+  - Wompi: `campos` va vacío y el navegador va a `urlPago` (checkout web con la firma de integridad).
 
 ## 3. Pagos (RF12)
 
-- `POST /webhooks/wompi` (público, firmado). Verifica `signature.checksum` = SHA-256(valores de `signature.properties` + `timestamp` + secreto de eventos). Firma inválida → `401`. Evento repetido (`idTransaccion:estado`) → `200` sin efecto.
+- `POST /pagos/payu/respuesta` (cliente; ADR 006). Cuerpo: los parámetros de la URL con la que PayU devolvió al cliente (`referenceCode`, `transactionState`, `TX_VALUE`, `currency`, `transactionId`, `signature`, `lapPaymentMethod`…). Verifica `signature` = MD5(`ApiKey~merchantId~referenceCode~TX_VALUE con un decimal~currency~transactionState`); firma inválida → `401`; pedido de otro cliente o referencia desconocida → `404`. `transactionState` 4/6/7 se procesan como `APPROVED`/`DECLINED`/`PENDING` (abajo); 5 y 104, como `ERROR`. Respuesta: `{ numero, estado, estadoPago }`. Repetir la misma respuesta no tiene efecto.
+- `POST /webhooks/wompi` (público, firmado; solo con Wompi activa). Verifica `signature.checksum` = SHA-256(valores de `signature.properties` + `timestamp` + secreto de eventos). Firma inválida → `401`. Evento repetido (`idTransaccion:estado`) → `200` sin efecto.
   - `APPROVED` con el monto exacto: salida de inventario (movimiento `SALIDA` por línea), pedido `PAGADO`, uso del cupón, correo.
   - `DECLINED`/`VOIDED`/`ERROR`: libera la reserva; el cliente puede reintentar. `PENDING`: no toca el inventario.
   - Monto distinto: el pago queda en `ERROR` y el pedido sigue pendiente.

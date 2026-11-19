@@ -1,4 +1,4 @@
-import { Component, RESPONSE_INIT, inject, input, signal } from '@angular/core';
+import { Component, RESPONSE_INIT, computed, inject, input, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -35,6 +35,11 @@ export class Catalogo {
   protected readonly detalle = signal<CategoriaDetalle | null>(null);
   protected readonly noEncontrada = signal(false);
   protected readonly cargando = signal(true);
+  /** En móvil los filtros se pliegan para que la primera pantalla muestre piezas. */
+  protected readonly filtrosAbiertos = signal(false);
+  protected readonly filtrosActivos = computed(() =>
+    ['q', 'material', 'precioMin', 'precioMax', 'disponible'].filter((k) => this.parametros().has(k)).length,
+  );
 
   // Copia editable de los filtros para el formulario.
   protected q = '';
@@ -81,6 +86,7 @@ export class Catalogo {
   }
 
   protected aplicar(): void {
+    this.filtrosAbiertos.set(false);
     void this.router.navigate([], {
       queryParams: {
         q: this.q.trim() || null,

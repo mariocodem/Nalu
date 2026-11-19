@@ -18,6 +18,9 @@ nalu:
     url-frontend: http://localhost:4200
   archivos:
     directorio: ${java.io.tmpdir}/nalu-pruebas-archivos
+  # Las pruebas de Wompi (CompraTest, OperacionTest) usan Wompi; PagoPayuTest activa PayU.
+  pagos:
+    pasarela: wompi
   wompi:
     llave-publica: pub_test_nalu
     secreto-integridad: test_integrity_nalu

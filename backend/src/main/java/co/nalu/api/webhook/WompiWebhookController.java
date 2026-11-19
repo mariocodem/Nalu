@@ -1,6 +1,7 @@
 package co.nalu.api.webhook;
 
 import co.nalu.negocio.pagos.PagoService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,9 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Eventos de Wompi (plan §6.4). Público y sin sesión: lo protege la firma del evento, que se
  * verifica en la capa de integración. Responde 200 a todo evento válido (también a los repetidos),
- * porque la pasarela reintenta mientras no lo reciba.
+ * porque la pasarela reintenta mientras no lo reciba. Solo existe con Wompi activa (ADR 006).
  */
 @RestController
+@ConditionalOnProperty(name = "nalu.pagos.pasarela", havingValue = "wompi")
 public class WompiWebhookController {
 
     private final PagoService pagos;
